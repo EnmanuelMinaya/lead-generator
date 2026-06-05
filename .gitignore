@@ -1,0 +1,76 @@
+# Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+PyCharmVirtualEnv/
+
+# Root virtual environment directories
+bin/
+include/
+lib/
+share/
+pyvenv.cfg
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment files and secrets
+.env
+.env.*
+*.env
+
+# SQLite and local databases
+*.sqlite3
+*.db
+*.db-journal
+
+# VS Code settings
+.vscode/
+
+# IDEs and editors
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+
+# Nested repositories or local clones
+lead-generator/
+
+# Logs
+*.log
+
+# Misc
+*.swp
+*~
