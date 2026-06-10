@@ -14,7 +14,7 @@ LOGGER = logging.getLogger(__name__)
 
 # Module-level resources to be initialised at app startup
 MODEL: SentenceTransformer = None
-CHROMA_CLIENT: chromadb.Client = None
+CHROMA_CLIENT: chromadb.PersistentClient = None
 COLLECTION = None
 
 
@@ -25,7 +25,7 @@ def init_resources(persist_directory: str = "./chroma_db"):
         LOGGER.info("Loaded embedding model all-MiniLM-L6-v2")
 
     if CHROMA_CLIENT is None:
-        CHROMA_CLIENT = chromadb.Client(Settings(chroma_db_impl="duckdb+parquet", persist_directory=persist_directory))
+        CHROMA_CLIENT = chromadb.PersistentClient(path=persist_directory)
         LOGGER.info("Initialised ChromaDB client with %s", persist_directory)
 
     try:
