@@ -185,9 +185,9 @@ def get_collection_count() -> int:
         return COLLECTION.count()
     except Exception:
         try:
-            # Fallback: fetch ids and count
-            res = COLLECTION.get(include=["ids"]) or {}
-            ids = res.get("ids") or []
-            return len(ids)
+            # Fallback: fetch documents and count them
+            res = COLLECTION.get(include=["documents"]) or {}
+            docs = res.get("documents") or []
+            return len(docs)
         except Exception:
             return 0
