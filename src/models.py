@@ -59,3 +59,31 @@ MODEL_BY_TYPE = {
     "download": DownloadArtifact,
     "bookmark": BookmarkArtifact,
 }
+
+
+class QueryRequest(BaseModel):
+    question: str
+    autopsy_case_id: str
+    top_k: int = 10
+    artifact_types: Optional[list[Literal["history", "search", "download", "bookmark"]]] = None
+
+    def validate_question(self):
+        if not self.question or not self.question.strip():
+            raise ValueError("question cannot be empty")
+
+    def validate_top_k(self):
+        if not (1 <= self.top_k <= 20):
+            raise ValueError("top_k must be between 1 and 20")
+
+    def validate_artifact_types(self):
+        if self.artifact_types:
+            valid = {"history", "search", "download", "bookmark"}
+            for at in self.artifact_types:
+                if at not in valid:
+                    raise ValueError(f"invalid artifact_type: {at}")
+
+    def __init__(self, **data):
+        super().__init__(**data)
+        self.validate_question()
+        self.validate_top_k()
+        self.validate_artifact_types()

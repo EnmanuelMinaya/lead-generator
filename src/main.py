@@ -4,6 +4,8 @@ from pydantic import ValidationError
 import logging
 
 import ingest
+import query
+from models import QueryRequest
 
 LOGGER = logging.getLogger("lead_generator")
 
@@ -15,6 +17,7 @@ def startup_event():
     logging.basicConfig(level=logging.INFO)
     LOGGER.info("Starting app and initialising resources...")
     ingest.init_resources()
+    query.init_llm_client()
 
 
 @app.post("/ingest")
@@ -36,6 +39,39 @@ async def ingest_endpoint(request: Request):
         return JSONResponse(status_code=500, content={"detail": "internal server error: %s" % str(exc)})
 
     return JSONResponse(status_code=201, content={"artifact_id": res["artifact_id"], "artifact_type": res["artifact_type"], "status": "stored"})
+
+
+@app.post("/query")
+async def query_endpoint(req: QueryRequest):
+    try:
+        res = query.process_query(
+            question=req.question,
+            autopsy_case_id=req.autopsy_case_id,
+            top_k=req.top_k,
+            artifact_types=req.artifact_types,
+        )
+    except ValueError as ve:
+        # Validation or malformed LLM response
+        LOGGER.warning("Query processing validation failed: %s", ve)
+        return JSONResponse(status_code=422, content={"detail": str(ve)})
+    except Exception as exc:
+        LOGGER.exception("Query processing failed: %s", exc)
+        return JSONResponse(status_code=500, content={"detail": f"internal server error: {str(exc)}"})
+
+    return JSONResponse(
+        status_code=200,
+        content={
+            "question": req.question,
+            "autopsy_case_id": req.autopsy_case_id,
+            "artifacts_retrieved": res["artifacts_retrieved"],
+            "leads": res["leads"],
+            "timeline": res["timeline"],
+            "gaps": res["gaps"],
+            "summary": res["summary"],
+            "hallucination_warnings": res.get("hallucination_warnings", []),
+            "artifact_ids_used": res["artifact_ids_used"],
+        },
+    )
 
 
 @app.get("/health")
