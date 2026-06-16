@@ -4,6 +4,7 @@ venv/
 env/
 ENV/
 PyCharmVirtualEnv/
+.env
 
 # Root virtual environment directories
 bin/
@@ -47,6 +48,8 @@ coverage.xml
 # Environment files and secrets
 .env
 .env.*
+
+test_output/
 *.env
 
 # SQLite and local databases
