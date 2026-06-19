@@ -395,7 +395,7 @@ def run_queries():
             "top_k": 10,
             "artifact_types": q["artifact_types"],
         }
-        resp = requests.post(QUERY_URL, json=payload, timeout=30)
+        resp = requests.post(QUERY_URL, json=payload, timeout=120)
         if not resp.ok:
             print(f"ERROR query {q['query_id']} status {resp.status_code}: {resp.text}")
             sys.exit(1)
