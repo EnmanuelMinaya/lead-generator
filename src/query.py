@@ -1,6 +1,7 @@
 import os
 import json
 import logging
+from datetime import datetime
 from typing import Any, Dict, List, Optional
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -16,6 +17,8 @@ LLM_CLIENT: OpenAI = None
 LLM_BASE_URL = os.getenv("LLM_BASE_URL")
 LLM_API_KEY = os.getenv("LLM_API_KEY")
 LLM_MODEL = os.getenv("LLM_MODEL")
+LLM_MAX_TOKENS = int(os.getenv("LLM_MAX_TOKENS", "2000"))
+LLM_REQUEST_TIMEOUT = int(os.getenv("LLM_REQUEST_TIMEOUT", "120"))
 
 
 def init_llm_client():
@@ -125,7 +128,7 @@ def format_artifact_context(artifacts: List[Dict[str, Any]]) -> str:
         ts = get_timestamp_for_artifact(artifact)
 
         lines.append(
-            f"[{idx}] artifact_id: {aid}\n"
+            f"     artifact_id: {aid}\n"
             f"     type: {artifact_type}\n"
             f"     {doc}\n"
             f"     timestamp: {ts}"
@@ -158,7 +161,7 @@ Rules you must follow without exception:
   anomalies you observe.
 - If you detect gaps in the timeline (periods with no activity) that seem
   unusual, flag them as potential use of private browsing or history deletion.
-
+- Never use list position numbers as artifact_ids. Always copy the exact UUID value from the artifact_id field.
 Respond in the following JSON structure and nothing else:
 {
   "leads": [
@@ -199,17 +202,23 @@ Recovered artifacts:
     ]
 
 
-def call_llm(messages: List[Dict[str, str]]) -> str:
-    """Call the LLM and return the response content."""
+def call_llm(messages: List[Dict[str, str]], timeout: int = None) -> tuple:
+    """Call the LLM and return the response content and finish_reason."""
+    if timeout is None:
+        timeout = LLM_REQUEST_TIMEOUT
     try:
         response = LLM_CLIENT.chat.completions.create(
             model=LLM_MODEL,
             messages=messages,
             temperature=0,
-            max_tokens=1000,
+            max_tokens=LLM_MAX_TOKENS,
+            timeout=timeout,
         )
         content = response.choices[0].message.content
-        return content
+        finish_reason = response.choices[0].finish_reason
+        if finish_reason == "length":
+            LOGGER.warning("LLM response truncated due to token limit (finish_reason='length')")
+        return content, finish_reason
     except Exception as exc:
         LOGGER.exception("LLM call failed: %s", exc)
         raise
@@ -296,10 +305,24 @@ def process_query(
     messages = build_llm_prompt(question, artifact_context)
 
     try:
-        llm_response = call_llm(messages)
+        llm_response, finish_reason = call_llm(messages, timeout=LLM_REQUEST_TIMEOUT)
+        if finish_reason == "length":
+            raise ValueError("LLM response truncated due to token limit. Increase LLM_MAX_TOKENS.")
     except Exception as exc:
         LOGGER.exception("LLM call failed: %s", exc)
         raise
+
+    # Save raw LLM response for debugging
+    try:
+        output_dir = os.path.join(os.getcwd(), "test_output")
+        os.makedirs(output_dir, exist_ok=True)
+        timestamp = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+        llm_debug_file = os.path.join(output_dir, f"llm_response_{timestamp}.txt")
+        with open(llm_debug_file, "w", encoding="utf-8") as f:
+            f.write(llm_response)
+        LOGGER.debug("Saved raw LLM response to %s", llm_debug_file)
+    except Exception as exc:
+        LOGGER.warning("Failed to save LLM response debug file: %s", exc)
 
     # Step 6: Parse response
     try:
