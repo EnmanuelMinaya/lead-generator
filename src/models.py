@@ -64,7 +64,7 @@ MODEL_BY_TYPE = {
 class QueryRequest(BaseModel):
     question: str
     autopsy_case_id: str
-    top_k: int = 10
+    top_k: int = 20
     artifact_types: Optional[list[Literal["history", "search", "download", "bookmark"]]] = None
 
     def validate_question(self):
