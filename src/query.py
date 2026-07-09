@@ -1,6 +1,8 @@
-import os
+import inspect
 import json
 import logging
+import math
+import os
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 from dotenv import load_dotenv
@@ -17,8 +19,29 @@ LLM_CLIENT: OpenAI = None
 LLM_BASE_URL = os.getenv("LLM_BASE_URL")
 LLM_API_KEY = os.getenv("LLM_API_KEY")
 LLM_MODEL = os.getenv("LLM_MODEL")
-LLM_MAX_TOKENS = int(os.getenv("LLM_MAX_TOKENS", "2000"))
-LLM_REQUEST_TIMEOUT = int(os.getenv("LLM_REQUEST_TIMEOUT", "120"))
+LLM_MAX_TOKENS = int(os.getenv("LLM_MAX_TOKENS", "1000"))
+LLM_REQUEST_TIMEOUT = int(os.getenv("LLM_REQUEST_TIMEOUT", "200"))
+ARTIFACT_TYPE_ORDER = ["history", "search", "download", "bookmark"]
+DECOMPOSITION_SYSTEM_PROMPT = """You are a query decomposition assistant for a digital forensics retrieval system. Your job is to break down an investigator's question into a set of specific sub-queries that will be used to retrieve browser artifacts from a vector database.
+
+The database contains four artifact types:
+- history: browser page visits with URLs, page titles, timestamps, navigation type (TYPED/LINK/FORM_SUBMIT)
+- search: web search queries with search terms, search engine, timestamp
+- download: downloaded files with filename, URL, file size, danger classification, save path
+- bookmark: saved bookmarks with title, URL, folder path, date added
+
+Rules:
+- Always generate exactly 4 sub-queries, one targeting each artifact type.
+- Each sub-query should be a short natural language phrase (5-10 words) that describes what to look for in that artifact type given the investigator's question.
+- If the question is not relevant to a particular artifact type, generate a broad fallback sub-query for that type anyway (e.g. "all bookmark records saved").
+- Respond ONLY with a valid JSON object, no preamble, no markdown fences:
+{
+  "history_query": "string",
+  "search_query": "string",
+  "download_query": "string",
+  "bookmark_query": "string"
+}
+"""
 
 
 def init_llm_client():
@@ -29,6 +52,75 @@ def init_llm_client():
             api_key=LLM_API_KEY,
         )
         LOGGER.info("Initialised LLM client: base_url=%s, model=%s", LLM_BASE_URL, LLM_MODEL)
+
+
+def _resolve_use_decomposition(use_decomposition: Optional[bool]) -> bool:
+    if use_decomposition is not None:
+        return use_decomposition
+
+    frame = inspect.currentframe()
+    try:
+        caller_locals = frame.f_back.f_locals if frame and frame.f_back else {}
+        for key in ("req", "request", "payload", "query_request"):
+            candidate = caller_locals.get(key)
+            if candidate is not None and hasattr(candidate, "use_decomposition"):
+                return bool(getattr(candidate, "use_decomposition"))
+    finally:
+        del frame
+
+    return True
+
+
+def decompose_question(question: str) -> Dict[str, str]:
+    """Decompose the investigator question into four targeted sub-queries."""
+    fallback_queries = {artifact_type: question for artifact_type in ARTIFACT_TYPE_ORDER}
+
+    messages = [
+        {"role": "system", "content": DECOMPOSITION_SYSTEM_PROMPT},
+        {"role": "user", "content": f"Decompose this question: {question}"},
+    ]
+
+    try:
+        llm_response, _ = call_llm(messages, timeout=LLM_REQUEST_TIMEOUT)
+    except Exception as exc:
+        LOGGER.warning("Question decomposition LLM call failed; falling back to the original question for all artifact types: %s", exc)
+        return fallback_queries
+
+    try:
+        parsed = json.loads(llm_response)
+    except json.JSONDecodeError as exc:
+        LOGGER.warning("Question decomposition response was not valid JSON; falling back to the original question for all artifact types: %s", exc)
+        # Fallback to the original question for all four artifact types if the decomposition response is malformed.
+        return fallback_queries
+
+    if not isinstance(parsed, dict):
+        LOGGER.warning("Question decomposition response was not an object; falling back to the original question for all artifact types")
+        return fallback_queries
+
+    decomposed = {}
+    for artifact_type in ARTIFACT_TYPE_ORDER:
+        query_key = f"{artifact_type}_query"
+        query_value = parsed.get(query_key)
+        if isinstance(query_value, str) and query_value.strip():
+            decomposed[artifact_type] = query_value.strip()
+        else:
+            decomposed[artifact_type] = question
+
+    return decomposed
+
+
+def get_subquery_allocations(top_k: int) -> Dict[str, int]:
+    """Compute per-type subquery sizes while preserving a minimum slot count per type."""
+    allocations = {}
+    base = top_k / 2
+    for artifact_type, ratio in {
+        "history": 0.35,
+        "search": 0.30,
+        "download": 0.20,
+        "bookmark": 0.15,
+    }.items():
+        allocations[artifact_type] = max(2, math.ceil(base * ratio))
+    return allocations
 
 
 def embed_question(question: str) -> List[float]:
@@ -98,6 +190,68 @@ def retrieve_artifacts(
             )
 
     return artifacts, artifact_ids
+
+
+def retrieve_artifacts_decomposed(
+    question: str,
+    autopsy_case_id: str,
+    artifact_types: Optional[List[str]] = None,
+    top_k: int = 10,
+) -> tuple:
+    """Run four decomposed subqueries against ChromaDB and merge the results."""
+    sub_queries = decompose_question(question)
+    allocations = get_subquery_allocations(top_k)
+
+    artifacts_by_type = {artifact_type: [] for artifact_type in ARTIFACT_TYPE_ORDER}
+    retrieved_per_type = {artifact_type: 0 for artifact_type in ARTIFACT_TYPE_ORDER}
+    selected_types = list(artifact_types) if artifact_types else ARTIFACT_TYPE_ORDER
+
+    for artifact_type in ARTIFACT_TYPE_ORDER:
+        if artifact_types and artifact_type not in selected_types:
+            continue
+
+        sub_query = sub_queries[artifact_type]
+        embedding = embed_question(sub_query)
+        where_filter = {
+            "$and": [
+                {"autopsy_case_id": {"$eq": autopsy_case_id}},
+                {"artifact_type": {"$eq": artifact_type}},
+            ]
+        }
+
+        try:
+            result = ingest.COLLECTION.query(
+                query_embeddings=[embedding],
+                n_results=allocations[artifact_type],
+                where=where_filter,
+                include=["documents", "metadatas", "distances"],
+            )
+        except Exception as exc:
+            LOGGER.exception("ChromaDB query failed for %s sub-query: %s", artifact_type, exc)
+            continue
+
+        if result and result["ids"] and len(result["ids"]) > 0:
+            for i, aid in enumerate(result["ids"][0]):
+                doc = result["documents"][0][i] if result["documents"] else ""
+                meta = result["metadatas"][0][i] if result["metadatas"] else {}
+                artifacts_by_type[artifact_type].append({"id": aid, "document": doc, "metadata": meta})
+
+        retrieved_per_type[artifact_type] = len(artifacts_by_type[artifact_type])
+
+    merged_artifacts = []
+    seen_artifact_ids = set()
+    for artifact_type in ARTIFACT_TYPE_ORDER:
+        for artifact in artifacts_by_type[artifact_type]:
+            artifact_id = artifact.get("id")
+            if artifact_id in seen_artifact_ids:
+                continue
+            seen_artifact_ids.add(artifact_id)
+            merged_artifacts.append(artifact)
+
+    merged_artifacts.sort(key=lambda artifact: (0, get_timestamp_for_artifact(artifact)) if get_timestamp_for_artifact(artifact) not in {"", "unknown", None} else (1, ""))
+    artifact_ids_set = {artifact["id"] for artifact in merged_artifacts}
+
+    return merged_artifacts, artifact_ids_set, retrieved_per_type, sub_queries
 
 
 def get_timestamp_for_artifact(artifact: Dict[str, Any]) -> str:
@@ -253,38 +407,54 @@ def process_query(
     autopsy_case_id: str,
     top_k: int = 10,
     artifact_types: Optional[List[str]] = None,
+    use_decomposition: Optional[bool] = None,
 ) -> Dict[str, Any]:
     """
     Orchestrate the full query pipeline:
-    1. Embed question
+    1. Decompose question (optional) or embed directly
     2. Retrieve artifacts
     3. Build LLM prompt
     4. Call LLM
     5. Parse and validate response
     6. Return structured result
     """
+    use_decomposition = _resolve_use_decomposition(use_decomposition)
 
-    # Step 2: Embed question
-    question_embedding = embed_question(question)
+    if use_decomposition:
+        artifacts, artifact_ids_set, retrieved_per_type, sub_queries = retrieve_artifacts_decomposed(
+            question,
+            autopsy_case_id,
+            artifact_types,
+            top_k,
+        )
+        artifacts_count = len(artifacts)
+        LOGGER.info(
+            "Retrieved %d artifacts for question='%s', case=%s, types=%s via decomposition",
+            artifacts_count,
+            question[:100],
+            autopsy_case_id,
+            artifact_types,
+        )
+        LOGGER.info("Decomposition sub-queries: history=%s, search=%s, download=%s, bookmark=%s", sub_queries["history"], sub_queries["search"], sub_queries["download"], sub_queries["bookmark"])
+        LOGGER.info("Decomposition retrieval counts before deduplication: history=%d, search=%d, download=%d, bookmark=%d", retrieved_per_type["history"], retrieved_per_type["search"], retrieved_per_type["download"], retrieved_per_type["bookmark"])
+        LOGGER.info("Decomposition deduplication summary: before=%d, after=%d, unique_types=%d", sum(retrieved_per_type.values()), artifacts_count, len({artifact.get("metadata", {}).get("artifact_type") for artifact in artifacts if artifact.get("metadata", {}).get("artifact_type")}))
+    else:
+        question_embedding = embed_question(question)
+        artifacts, artifact_ids_set = retrieve_artifacts(
+            question_embedding,
+            autopsy_case_id,
+            artifact_types,
+            top_k,
+        )
+        artifacts_count = len(artifacts)
+        LOGGER.info(
+            "Retrieved %d artifacts for question='%s', case=%s, types=%s",
+            artifacts_count,
+            question[:100],
+            autopsy_case_id,
+            artifact_types,
+        )
 
-    # Step 3: Retrieve artifacts
-    artifacts, artifact_ids_set = retrieve_artifacts(
-        question_embedding,
-        autopsy_case_id,
-        artifact_types,
-        top_k,
-    )
-
-    artifacts_count = len(artifacts)
-    LOGGER.info(
-        "Retrieved %d artifacts for question='%s', case=%s, types=%s",
-        artifacts_count,
-        question[:100],
-        autopsy_case_id,
-        artifact_types,
-    )
-
-    # If no results, return early
     if artifacts_count == 0:
         LOGGER.warning("No artifacts found for case %s", autopsy_case_id)
         return {
@@ -296,12 +466,20 @@ def process_query(
             "artifacts_retrieved": 0,
             "artifact_ids_used": [],
             "hallucination_warnings": [],
+            "decomposition_metadata": None if not use_decomposition else {
+                "sub_queries": {
+                    "history": sub_queries["history"],
+                    "search": sub_queries["search"],
+                    "download": sub_queries["download"],
+                    "bookmark": sub_queries["bookmark"],
+                },
+                "retrieved_per_type": {artifact_type: retrieved_per_type[artifact_type] for artifact_type in ARTIFACT_TYPE_ORDER},
+                "deduplicated_total": artifacts_count,
+            },
         }
 
-    # Step 4: Build LLM context
     artifact_context = format_artifact_context(artifacts)
 
-    # Step 5: Build and call LLM
     messages = build_llm_prompt(question, artifact_context)
 
     try:
@@ -312,7 +490,6 @@ def process_query(
         LOGGER.exception("LLM call failed: %s", exc)
         raise
 
-    # Save raw LLM response for debugging
     try:
         output_dir = os.path.join(os.getcwd(), "test_output")
         os.makedirs(output_dir, exist_ok=True)
@@ -324,19 +501,16 @@ def process_query(
     except Exception as exc:
         LOGGER.warning("Failed to save LLM response debug file: %s", exc)
 
-    # Step 6: Parse response
     try:
         parsed_response = json.loads(llm_response)
     except json.JSONDecodeError as exc:
         LOGGER.exception("Failed to parse LLM JSON response: %s", exc)
         raise ValueError(f"LLM returned malformed JSON: {str(exc)}")
 
-    # Step 7: Validate citations
     hallucinations = validate_citations(parsed_response, artifact_ids_set)
     if hallucinations:
         LOGGER.warning("Detected %d hallucinated artifact citations for case %s", len(hallucinations), autopsy_case_id)
 
-    # Step 8: Build final response
     return {
         "leads": parsed_response.get("leads", []),
         "timeline": parsed_response.get("timeline", []),
@@ -348,4 +522,14 @@ def process_query(
             {"artifact_id": hid, "message": f"Citation to artifact_id {hid} not found in retrieved set"}
             for hid in hallucinations
         ],
+        "decomposition_metadata": None if not use_decomposition else {
+            "sub_queries": {
+                "history": sub_queries["history"],
+                "search": sub_queries["search"],
+                "download": sub_queries["download"],
+                "bookmark": sub_queries["bookmark"],
+            },
+            "retrieved_per_type": {artifact_type: retrieved_per_type[artifact_type] for artifact_type in ARTIFACT_TYPE_ORDER},
+            "deduplicated_total": artifacts_count,
+        },
     }

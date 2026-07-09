@@ -66,6 +66,7 @@ class QueryRequest(BaseModel):
     autopsy_case_id: str
     top_k: int = 20
     artifact_types: Optional[list[Literal["history", "search", "download", "bookmark"]]] = None
+    use_decomposition: bool = False
 
     def validate_question(self):
         if not self.question or not self.question.strip():

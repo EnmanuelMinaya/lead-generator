@@ -33,7 +33,7 @@ def init_resources(persist_directory: str = "./chroma_db"):
     except Exception:
         COLLECTION = CHROMA_CLIENT.create_collection("browser_artifacts")
     LOGGER.info("Using collection 'browser_artifacts'")
-
+    
 
 def safe_str(val: Any, fallback: str = "unknown") -> str:
     if val is None:

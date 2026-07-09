@@ -392,7 +392,7 @@ def run_queries():
         payload = {
             "question": q["question"],
             "autopsy_case_id": ARTIFACT_CASE_ID,
-            "top_k": 10,
+            "top_k": 15,
             "artifact_types": q["artifact_types"],
         }
         resp = requests.post(QUERY_URL, json=payload, timeout=120)
