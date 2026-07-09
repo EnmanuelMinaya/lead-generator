@@ -1,0 +1,68 @@
+{
+  "scenario": "financial_fraud_identity_theft",
+  "case_id": "CASE-2024-002",
+  "os_user_account": "sarah.chen",
+  "date": "2024-09-03",
+  "expected_leads": [
+    {
+      "lead_id": "L001",
+      "description": "Subject researched identity theft and credit card fraud techniques",
+      "supporting_artifact_types": [
+        "search",
+        "history"
+      ],
+      "severity": "high"
+    },
+    {
+      "lead_id": "L002",
+      "description": "Subject researched cryptocurrency mixing and money laundering methods",
+      "supporting_artifact_types": [
+        "search",
+        "history"
+      ],
+      "severity": "high"
+    },
+    {
+      "lead_id": "L003",
+      "description": "Subject downloaded Tor Browser \u2014 anonymisation tool",
+      "supporting_artifact_types": [
+        "download"
+      ],
+      "severity": "high"
+    },
+    {
+      "lead_id": "L004",
+      "description": "Subject downloaded internal bank customer account data and transaction logs",
+      "supporting_artifact_types": [
+        "download"
+      ],
+      "severity": "high"
+    },
+    {
+      "lead_id": "L005",
+      "description": "Subject bookmarked cryptocurrency exchanges and anonymous communication tools",
+      "supporting_artifact_types": [
+        "bookmark"
+      ],
+      "severity": "medium"
+    },
+    {
+      "lead_id": "L006",
+      "description": "Suspicious gap in browser activity between 12:30 and 13:30",
+      "supporting_artifact_types": [],
+      "severity": "medium"
+    },
+    {
+      "lead_id": "L007",
+      "description": "Subject used DuckDuckGo for all fraud and crypto searches, Google for cover traffic",
+      "supporting_artifact_types": [
+        "search"
+      ],
+      "severity": "medium"
+    }
+  ],
+  "expected_timeline_start": "2024-09-03T08:30:00Z",
+  "expected_timeline_end": "2024-09-03T17:00:00Z",
+  "expected_gap_start": "2024-09-03T12:30:00Z",
+  "expected_gap_end": "2024-09-03T13:30:00Z"
+}
