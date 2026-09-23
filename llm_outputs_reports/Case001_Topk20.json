@@ -1,0 +1,562 @@
+Summary:
+  Scenario: Insider threat and data exfiltration
+  Case ID: CASE-2024-001
+  Total artifacts ingested: 57
+  Total queries run: 5
+  Use decomposition: False
+  Top k: 20
+  Total leads generated: 18
+  Total hallucination warnings: 2
+  Output written to: /Users/enmanuelminaya/Repos/embedding-pipeline/lead-generator/test_output
+
+{
+  "case_id": "CASE-2024-001",
+  "queries": [
+    {
+      "query_id": "Q001",
+      "question": "What suspicious activity did this user carry out on 2024-06-12?",
+      "artifacts_retrieved": 11,
+      "leads_generated": 4,
+      "hallucination_warnings": [],
+      "raw_response": {
+        "question": "What suspicious activity did this user carry out on 2024-06-12?",
+        "autopsy_case_id": "CASE-2024-001",
+        "artifacts_retrieved": 11,
+        "leads": [
+          {
+            "lead": "User searched for methods to exfiltrate data from a corporate network [85a3f0a0-01ab-4154-9996-107277982297].",
+            "severity": "high",
+            "artifact_ids": [
+              "85a3f0a0-01ab-4154-9996-107277982297"
+            ],
+            "explanation": "This search directly indicates intent to learn how to bypass corporate security controls to remove data, which is a primary indicator of malicious insider activity."
+          },
+          {
+            "lead": "User downloaded a compression utility classified as a dangerous file [20337e17-1732-47cb-85a6-be11f42e1393].",
+            "severity": "high",
+            "artifact_ids": [
+              "20337e17-1732-47cb-85a6-be11f42e1393"
+            ],
+            "explanation": "Compression tools like 7-Zip are routinely used to package stolen files for easier transfer and to evade basic content inspection systems."
+          },
+          {
+            "lead": "User downloaded a sensitive internal corporate file (employee directory) [b162a756-b260-4555-a540-44a93aeee74c].",
+            "severity": "high",
+            "artifact_ids": [
+              "b162a756-b260-4555-a540-44a93aeee74c"
+            ],
+            "explanation": "Downloading an HR employee directory from an internal URL suggests unauthorized access to and extraction of proprietary organizational data."
+          },
+          {
+            "lead": "User researched anonymous cloud storage and bookmarked secure communication platforms [1860f895-3215-4d5a-a999-fe59e449eb50, 0f9e1123-bc1b-4686-ae0e-4472eb785bfd, 65141df6-a52d-49e7-b6d1-5f4627017a1e].",
+            "severity": "medium",
+            "artifact_ids": [
+              "1860f895-3215-4d5a-a999-fe59e449eb50",
+              "0f9e1123-bc1b-4686-ae0e-4472eb785bfd",
+              "65141df6-a52d-49e7-b6d1-5f4627017a1e"
+            ],
+            "explanation": "Searching for 'no logs' cloud storage and bookmarking MEGA and Telegram Web aligns with setting up covert channels for data exfiltration and encrypted communication."
+          }
+        ],
+        "timeline": [
+          {
+            "timestamp": "2024-06-12T08:55:00Z",
+            "event": "Visited BBC News - World [6c0e5b98-0868-4848-8862-c353d28f4b10]",
+            "artifact_id": "6c0e5b98-0868-4848-8862-c353d28f4b10"
+          },
+          {
+            "timestamp": "2024-06-12T09:05:00Z",
+            "event": "Visited BBC News - Business [0f8046b8-db03-46c8-9ff1-3a81623ae12b]",
+            "artifact_id": "0f8046b8-db03-46c8-9ff1-3a81623ae12b"
+          },
+          {
+            "timestamp": "2024-06-12T09:58:00Z",
+            "event": "Searched for 'project timeline management' [d4fa2f96-f394-4533-b4e1-511363b6ea66]",
+            "artifact_id": "d4fa2f96-f394-4533-b4e1-511363b6ea66"
+          },
+          {
+            "timestamp": "2024-06-12T10:52:00Z",
+            "event": "Searched for 'best cloud storage no logs' [1860f895-3215-4d5a-a999-fe59e449eb50]",
+            "artifact_id": "1860f895-3215-4d5a-a999-fe59e449eb50"
+          },
+          {
+            "timestamp": "2024-06-12T11:27:00Z",
+            "event": "Searched for 'how to exfiltrate data from corporate network' [85a3f0a0-01ab-4154-9996-107277982297]",
+            "artifact_id": "85a3f0a0-01ab-4154-9996-107277982297"
+          },
+          {
+            "timestamp": "2024-06-12T12:10:00Z",
+            "event": "Searched for 'news headlines today' [813ce7e0-ce62-4ea2-89b8-a6d8b1977f44]",
+            "artifact_id": "813ce7e0-ce62-4ea2-89b8-a6d8b1977f44"
+          },
+          {
+            "timestamp": "2024-06-12T13:48:00Z",
+            "event": "Downloaded '7z2301-x64.exe' from 7-zip.org [20337e17-1732-47cb-85a6-be11f42e1393]",
+            "artifact_id": "20337e17-1732-47cb-85a6-be11f42e1393"
+          },
+          {
+            "timestamp": "2024-06-12T14:35:00Z",
+            "event": "Downloaded 'employee_directory.csv' from internal corporate site [b162a756-b260-4555-a540-44a93aeee74c]",
+            "artifact_id": "b162a756-b260-4555-a540-44a93aeee74c"
+          },
+          {
+            "timestamp": "2024-06-12T14:45:00Z",
+            "event": "Bookmarked MEGA Cloud Storage [0f9e1123-bc1b-4686-ae0e-4472eb785bfd]",
+            "artifact_id": "0f9e1123-bc1b-4686-ae0e-4472eb785bfd"
+          },
+          {
+            "timestamp": "2024-06-12T15:25:00Z",
+            "event": "Bookmarked Telegram Web [65141df6-a52d-49e7-b6d1-5f4627017a1e]",
+            "artifact_id": "65141df6-a52d-49e7-b6d1-5f4627017a1e"
+          },
+          {
+            "timestamp": "2024-06-12T16:05:00Z",
+            "event": "Searched for 'weather tomorrow' [29a5bd18-7fa6-4434-aef9-c0535319edf1]",
+            "artifact_id": "29a5bd18-7fa6-4434-aef9-c0535319edf1"
+          }
+        ],
+        "gaps": [],
+        "summary": "The user's activity on 2024-06-12 follows a distinct sequential pattern consistent with data exfiltration preparation, progressing from research on anonymous storage and exfiltration techniques to acquiring a compression tool and downloading an internal employee directory. Subsequent bookmarking of MEGA and Telegram Web strongly suggests the establishment of covert channels for transferring the acquired data. No significant timeline gaps were observed that would indicate history clearing or private browsing sessions.",
+        "hallucination_warnings": [],
+        "artifact_ids_used": [
+          "d4fa2f96-f394-4533-b4e1-511363b6ea66",
+          "1860f895-3215-4d5a-a999-fe59e449eb50",
+          "0f9e1123-bc1b-4686-ae0e-4472eb785bfd",
+          "85a3f0a0-01ab-4154-9996-107277982297",
+          "b162a756-b260-4555-a540-44a93aeee74c",
+          "65141df6-a52d-49e7-b6d1-5f4627017a1e",
+          "0f8046b8-db03-46c8-9ff1-3a81623ae12b",
+          "813ce7e0-ce62-4ea2-89b8-a6d8b1977f44",
+          "29a5bd18-7fa6-4434-aef9-c0535319edf1",
+          "6c0e5b98-0868-4848-8862-c353d28f4b10",
+          "20337e17-1732-47cb-85a6-be11f42e1393"
+        ]
+      }
+    },
+    {
+      "query_id": "Q002",
+      "question": "Did the user show intent to exfiltrate data? What evidence supports this?",
+      "artifacts_retrieved": 7,
+      "leads_generated": 3,
+      "hallucination_warnings": [],
+      "raw_response": {
+        "question": "Did the user show intent to exfiltrate data? What evidence supports this?",
+        "autopsy_case_id": "CASE-2024-001",
+        "artifacts_retrieved": 7,
+        "leads": [
+          {
+            "lead": "User conducted multiple searches specifically focused on transferring large files while evading corporate IT detection [d671bb44-732b-45a2-b57c-65d495286475, 87bcc59b-d4c9-4a26-a041-741415621eb6]",
+            "severity": "high",
+            "artifact_ids": [
+              "d671bb44-732b-45a2-b57c-65d495286475",
+              "87bcc59b-d4c9-4a26-a041-741415621eb6"
+            ],
+            "explanation": "The explicit mention of avoiding IT company knowledge and using undetected methods directly points to an intent to bypass organizational security controls for data movement."
+          },
+          {
+            "lead": "User researched anonymization and encryption techniques to secure data prior to transfer [44d772f1-277f-4352-9f64-61fab39666a9, c44aa898-343d-4d70-9cca-9a7bd2d70480]",
+            "severity": "high",
+            "artifact_ids": [
+              "44d772f1-277f-4352-9f64-61fab39666a9",
+              "c44aa898-343d-4d70-9cca-9a7bd2d70480"
+            ],
+            "explanation": "Seeking anonymous sending methods and specific encryption passwords indicates preparation to protect sensitive data from interception or forensic analysis during exfiltration."
+          },
+          {
+            "lead": "User transitioned from research to practical application by searching for secure file sharing tools and immediately accessing Google Drive [f6bda949-ad71-48d6-8d0a-8a236bce4ee0, 58457db6-8e4a-469c-a27c-5cb69869cc95]",
+            "severity": "high",
+            "artifact_ids": [
+              "f6bda949-ad71-48d6-8d0a-8a236bce4ee0",
+              "58457db6-8e4a-469c-a27c-5cb69869cc95"
+            ],
+            "explanation": "The rapid shift from tool research to accessing a major cloud storage platform suggests the user identified a viable vector for uploading the prepared data."
+          }
+        ],
+        "timeline": [
+          {
+            "timestamp": "2024-06-12T10:15:00Z",
+            "event": "User searched for how to transfer large files securely without IT company knowing [d671bb44-732b-45a2-b57c-65d495286475]",
+            "artifact_id": "d671bb44-732b-45a2-b57c-65d495286475"
+          },
+          {
+            "timestamp": "2024-06-12T10:35:00Z",
+            "event": "User visited DuckDuckGo search results for copying files to cloud undetected [87bcc59b-d4c9-4a26-a041-741415621eb6]",
+            "artifact_id": "87bcc59b-d4c9-4a26-a041-741415621eb6"
+          },
+          {
+            "timestamp": "2024-06-12T10:45:00Z",
+            "event": "User visited a Privacy Stack Exchange page on sending large files anonymously [44d772f1-277f-4352-9f64-61fab39666a9]",
+            "artifact_id": "44d772f1-277f-4352-9f64-61fab39666a9"
+          },
+          {
+            "timestamp": "2024-06-12T11:20:00Z",
+            "event": "User searched for 7zip encrypt archive password [c44aa898-343d-4d70-9cca-9a7bd2d70480]",
+            "artifact_id": "c44aa898-343d-4d70-9cca-9a7bd2d70480"
+          },
+          {
+            "timestamp": "2024-06-12T11:35:00Z",
+            "event": "User visited a SANS white paper on secure file transfer [671420a1-708d-4e7f-9ee5-c2ce532a95b2]",
+            "artifact_id": "671420a1-708d-4e7f-9ee5-c2ce532a95b2"
+          },
+          {
+            "timestamp": "2024-06-12T12:25:00Z",
+            "event": "User searched for secure file sharing tools [f6bda949-ad71-48d6-8d0a-8a236bce4ee0]",
+            "artifact_id": "f6bda949-ad71-48d6-8d0a-8a236bce4ee0"
+          },
+          {
+            "timestamp": "2024-06-12T12:27:00Z",
+            "event": "User visited the Google Drive homepage [58457db6-8e4a-469c-a27c-5cb69869cc95]",
+            "artifact_id": "58457db6-8e4a-469c-a27c-5cb69869cc95"
+          }
+        ],
+        "gaps": [
+          {
+            "gap_start": "2024-06-12T11:35:00Z",
+            "gap_end": "2024-06-12T12:25:00Z",
+            "note": "A 50-minute gap occurs after reviewing secure transfer methods and before searching for sharing tools. This could indicate offline file compression, direct transfer attempts, or use of private browsing/history deletion to conceal intermediate steps."
+          }
+        ],
+        "summary": "The recovered browser artifacts reveal a highly focused, sequential pattern of research into covert data transfer, encryption, and cloud storage access within a two-hour window. This behavior strongly indicates preparatory intent for data exfiltration aimed at evading corporate IT monitoring. Confirmation of actual data movement requires correlation with network traffic logs, local file system modifications, and Google Drive upload records.",
+        "hallucination_warnings": [],
+        "artifact_ids_used": [
+          "58457db6-8e4a-469c-a27c-5cb69869cc95",
+          "671420a1-708d-4e7f-9ee5-c2ce532a95b2",
+          "44d772f1-277f-4352-9f64-61fab39666a9",
+          "87bcc59b-d4c9-4a26-a041-741415621eb6",
+          "f6bda949-ad71-48d6-8d0a-8a236bce4ee0",
+          "c44aa898-343d-4d70-9cca-9a7bd2d70480",
+          "d671bb44-732b-45a2-b57c-65d495286475"
+        ]
+      }
+    },
+    {
+      "query_id": "Q003",
+      "question": "What files did the user download and are any of them suspicious?",
+      "artifacts_retrieved": 2,
+      "leads_generated": 2,
+      "hallucination_warnings": [],
+      "raw_response": {
+        "question": "What files did the user download and are any of them suspicious?",
+        "autopsy_case_id": "CASE-2024-001",
+        "artifacts_retrieved": 2,
+        "leads": [
+          {
+            "lead": "User downloaded an executable file named '7z2301-x64.exe' which was explicitly classified by the browser as a 'dangerous_file' [20337e17-1732-47cb-85a6-be11f42e1393]",
+            "severity": "high",
+            "artifact_ids": [
+              "20337e17-1732-47cb-85a6-be11f42e1393"
+            ],
+            "explanation": "The browser's risk classification indicates a potential security threat, warranting immediate analysis of the file's integrity and execution history."
+          },
+          {
+            "lead": "User downloaded an internal corporate document named 'employee_directory.csv' from a local network domain [b162a756-b260-4555-a540-44a93aeee74c]",
+            "severity": "medium",
+            "artifact_ids": [
+              "b162a756-b260-4555-a540-44a93aeee74c"
+            ],
+            "explanation": "While classified as safe, downloading internal HR data could indicate routine administrative tasks or potential unauthorized data access, requiring verification against the user's authorized access levels."
+          }
+        ],
+        "timeline": [
+          {
+            "timestamp": "2024-06-12T13:48:00Z",
+            "event": "User downloaded '7z2301-x64.exe' (application/x-msdownload, 1545728 bytes) from https://www.7-zip.org/a/7z2301-x64.exe, saved to C:/Users/james.wright/Downloads/ [20337e17-1732-47cb-85a6-be11f42e1393]",
+            "artifact_id": "20337e17-1732-47cb-85a6-be11f42e1393"
+          },
+          {
+            "timestamp": "2024-06-12T14:35:00Z",
+            "event": "User downloaded 'employee_directory.csv' (text/csv, 512000 bytes) from https://nexacorp.internal/hr/employee_directory.csv, saved to C:/Users/james.wright/Downloads/ [b162a756-b260-4555-a540-44a93aeee74c]",
+            "artifact_id": "b162a756-b260-4555-a540-44a93aeee74c"
+          }
+        ],
+        "gaps": [],
+        "summary": "The user James Wright downloaded two files on June 12, 2024: a compressed archive executable flagged as dangerous by Chrome, and an internal HR CSV file classified as safe. The dangerous executable requires immediate forensic analysis to determine if it was malicious or a false positive, while the internal file download should be cross-referenced with the user's authorized access levels.",
+        "hallucination_warnings": [],
+        "artifact_ids_used": [
+          "b162a756-b260-4555-a540-44a93aeee74c",
+          "20337e17-1732-47cb-85a6-be11f42e1393"
+        ]
+      }
+    },
+    {
+      "query_id": "Q004",
+      "question": "Construct a chronological timeline of the user's activity on 2024-06-12.",
+      "artifacts_retrieved": 11,
+      "leads_generated": 5,
+      "hallucination_warnings": [],
+      "raw_response": {
+        "question": "Construct a chronological timeline of the user's activity on 2024-06-12.",
+        "autopsy_case_id": "CASE-2024-001",
+        "artifacts_retrieved": 11,
+        "leads": [
+          {
+            "lead": "User performed a direct search for methods to extract data from corporate networks using DuckDuckGo [85a3f0a0-01ab-4154-9996-107277982297]",
+            "severity": "high",
+            "artifact_ids": [
+              "85a3f0a0-01ab-4154-9996-107277982297"
+            ],
+            "explanation": "This query demonstrates explicit intent to learn how to bypass corporate security controls and remove sensitive information, indicating premeditated malicious activity."
+          },
+          {
+            "lead": "User accessed Tresorit Send, an encrypted file-sharing platform, approximately 30 minutes after searching for exfiltration techniques [e159556b-c6a8-4645-935e-73a0a8c85edf]",
+            "severity": "high",
+            "artifact_ids": [
+              "e159556b-c6a8-4645-935e-73a0a8c85edf"
+            ],
+            "explanation": "Visiting a secure, anonymous file transfer service immediately following exfiltration research strongly suggests preparation for unauthorized data transmission."
+          },
+          {
+            "lead": "User downloaded the 7-Zip installer, which the browser classified as a dangerous file [20337e17-1732-47cb-85a6-be11f42e1393]",
+            "severity": "medium",
+            "artifact_ids": [
+              "20337e17-1732-47cb-85a6-be11f42e1393"
+            ],
+            "explanation": "Compression software is frequently used to package stolen data for easier transport or to evade detection; the browser's dangerous file classification warrants further examination."
+          },
+          {
+            "lead": "User downloaded an internal employee directory CSV file directly from the corporate intranet [b162a756-b260-4555-a540-44a93aeee74c]",
+            "severity": "high",
+            "artifact_ids": [
+              "b162a756-b260-4555-a540-44a93aeee74c"
+            ],
+            "explanation": "Retrieving a sensitive HR document from an internal server indicates unauthorized access to proprietary organizational data, likely intended for exfiltration."
+          },
+          {
+            "lead": "User bookmarked MEGA Cloud Storage and Telegram Web within a short timeframe [0f9e1123-bc1b-4686-ae0e-4472eb785bfd, 65141df6-a52d-49e7-b6d1-5f4627017a1e]",
+            "severity": "medium",
+            "artifact_ids": [
+              "0f9e1123-bc1b-4686-ae0e-4472eb785bfd",
+              "65141df6-a52d-49e7-b6d1-5f4627017a1e"
+            ],
+            "explanation": "Saving these specific tools aligns with common post-exfiltration workflows for secure data hosting and encrypted communication, suggesting planning for data disposal or contact."
+          }
+        ],
+        "timeline": [
+          {
+            "timestamp": "2024-06-12T08:55:00Z",
+            "event": "User searched for 'latest market news' on Google [9e4e4b7d-ea7d-4f10-b233-56dd8cf92a34]",
+            "artifact_id": "9e4e4b7d-ea7d-4f10-b233-56dd8cf92a34"
+          },
+          {
+            "timestamp": "2024-06-12T08:55:00Z",
+            "event": "User visited BBC News - World [6c0e5b98-0868-4848-8862-c353d28f4b10]",
+            "artifact_id": "6c0e5b98-0868-4848-8862-c353d28f4b10"
+          },
+          {
+            "timestamp": "2024-06-12T09:58:00Z",
+            "event": "User visited a Google search results page for 'project timeline management' [d4fa2f96-f394-4533-b4e1-511363b6ea66]",
+            "artifact_id": "d4fa2f96-f394-4533-b4e1-511363b6ea66"
+          },
+          {
+            "timestamp": "2024-06-12T11:27:00Z",
+            "event": "User performed a DuckDuckGo search for 'how to exfiltrate data from corporate network' [85a3f0a0-01ab-4154-9996-107277982297]",
+            "artifact_id": "85a3f0a0-01ab-4154-9996-107277982297"
+          },
+          {
+            "timestamp": "2024-06-12T11:59:00Z",
+            "event": "User visited Tresorit Send, an encrypted file-sharing service [e159556b-c6a8-4645-935e-73a0a8c85edf]",
+            "artifact_id": "e159556b-c6a8-4645-935e-73a0a8c85edf"
+          },
+          {
+            "timestamp": "2024-06-12T12:10:00Z",
+            "event": "User searched for 'news headlines today' on Google [813ce7e0-ce62-4ea2-89b8-a6d8b1977f44]",
+            "artifact_id": "813ce7e0-ce62-4ea2-89b8-a6d8b1977f44"
+          },
+          {
+            "timestamp": "2024-06-12T13:48:00Z",
+            "event": "User downloaded '7z2301-x64.exe' (7-Zip installer), flagged as a dangerous file [20337e17-1732-47cb-85a6-be11f42e1393]",
+            "artifact_id": "20337e17-1732-47cb-85a6-be11f42e1393"
+          },
+          {
+            "timestamp": "2024-06-12T14:35:00Z",
+            "event": "User downloaded 'employee_directory.csv' from the internal corporate HR server [b162a756-b260-4555-a540-44a93aeee74c]",
+            "artifact_id": "b162a756-b260-4555-a540-44a93aeee74c"
+          },
+          {
+            "timestamp": "2024-06-12T14:45:00Z",
+            "event": "User bookmarked MEGA Cloud Storage [0f9e1123-bc1b-4686-ae0e-4472eb785bfd]",
+            "artifact_id": "0f9e1123-bc1b-4686-ae0e-4472eb785bfd"
+          },
+          {
+            "timestamp": "2024-06-12T15:25:00Z",
+            "event": "User bookmarked Telegram Web [65141df6-a52d-49e7-b6d1-5f4627017a1e]",
+            "artifact_id": "65141df6-a52d-49e7-b6d1-5f4627017a1e"
+          },
+          {
+            "timestamp": "2024-06-12T16:05:00Z",
+            "event": "User searched for 'weather tomorrow' on Google [29a5bd18-7fa6-4434-aef9-c0535319edf1]",
+            "artifact_id": "29a5bd18-7fa6-4434-aef9-c0535319edf1"
+          }
+        ],
+        "gaps": [
+          {
+            "gap_start": "2024-06-12T12:10:00Z",
+            "gap_end": "2024-06-12T13:48:00Z",
+            "note": "A 1 hour and 38 minute period with no recorded browser activity occurs between a general news search and the download of compression software. This gap may indicate off-browser activity, use of private browsing, or deliberate history deletion before proceeding with file packaging."
+          }
+        ],
+        "summary": "The user's activity on 2024-06-12 transitions from routine news browsing to a highly coordinated sequence of actions indicative of data exfiltration. Key evidence includes researching network extraction methods, accessing encrypted file-sharing services, downloading compression tools, retrieving an internal employee directory, and bookmarking secure cloud and communication platforms. These artifacts collectively suggest a deliberate effort to acquire, package, and prepare sensitive corporate data for unauthorized transfer.",
+        "hallucination_warnings": [],
+        "artifact_ids_used": [
+          "d4fa2f96-f394-4533-b4e1-511363b6ea66",
+          "e159556b-c6a8-4645-935e-73a0a8c85edf",
+          "0f9e1123-bc1b-4686-ae0e-4472eb785bfd",
+          "85a3f0a0-01ab-4154-9996-107277982297",
+          "b162a756-b260-4555-a540-44a93aeee74c",
+          "65141df6-a52d-49e7-b6d1-5f4627017a1e",
+          "29a5bd18-7fa6-4434-aef9-c0535319edf1",
+          "813ce7e0-ce62-4ea2-89b8-a6d8b1977f44",
+          "9e4e4b7d-ea7d-4f10-b233-56dd8cf92a34",
+          "6c0e5b98-0868-4848-8862-c353d28f4b10",
+          "20337e17-1732-47cb-85a6-be11f42e1393"
+        ]
+      }
+    },
+    {
+      "query_id": "Q005",
+      "question": "Are there any unusual gaps or anomalies in the user's browser activity?",
+      "artifacts_retrieved": 11,
+      "leads_generated": 4,
+      "hallucination_warnings": [
+        {
+          "artifact_id": "d4fa2f96-f394-4533-b4e1-511363b6ea66, 96a03746-a209-4aec-af1c-661ea5142a8f",
+          "message": "Citation to artifact_id d4fa2f96-f394-4533-b4e1-511363b6ea66, 96a03746-a209-4aec-af1c-661ea5142a8f not found in retrieved set"
+        },
+        {
+          "artifact_id": "a71a3f4d-f9a2-4a7c-bf10-c0ee895b9df8, 386088cb-2431-4799-88c0-d29b5803fd51",
+          "message": "Citation to artifact_id a71a3f4d-f9a2-4a7c-bf10-c0ee895b9df8, 386088cb-2431-4799-88c0-d29b5803fd51 not found in retrieved set"
+        }
+      ],
+      "raw_response": {
+        "question": "Are there any unusual gaps or anomalies in the user's browser activity?",
+        "autopsy_case_id": "CASE-2024-001",
+        "artifacts_retrieved": 11,
+        "leads": [
+          {
+            "lead": "User investigated corporate network monitoring using a privacy-focused search engine [79bfe5d0-1b38-49f5-97db-6a2933d216a7]",
+            "severity": "high",
+            "artifact_ids": [
+              "79bfe5d0-1b38-49f5-97db-6a2933d216a7"
+            ],
+            "explanation": "Searching for 'nexacorp VPN logs monitored' on DuckDuckGo indicates awareness of corporate surveillance and an attempt to use a non-tracking search engine, which is often associated with evading detection during sensitive operations."
+          },
+          {
+            "lead": "User researched and downloaded third-party data synchronization and compression tools [a71a3f4d-f9a2-4a7c-bf10-c0ee895b9df8, 386088cb-2431-4799-88c0-d29b5803fd51, 20337e17-1732-47cb-85a6-be11f42e1393, 24522944-bdf4-4676-ad4b-2cd766cbf864]",
+            "severity": "high",
+            "artifact_ids": [
+              "a71a3f4d-f9a2-4a7c-bf10-c0ee895b9df8",
+              "386088cb-2431-4799-88c0-d29b5803fd51",
+              "20337e17-1732-47cb-85a6-be11f42e1393",
+              "24522944-bdf4-4676-ad4b-2cd766cbf864"
+            ],
+            "explanation": "Sequential searches for 'mega sync client' and 'rclone vs robocopy', followed by downloads of 7-Zip and MEGA Sync setup files explicitly flagged as 'dangerous_file', strongly suggest preparation for bulk data extraction or unauthorized external transfer."
+          },
+          {
+            "lead": "User accessed internal project resources prior to shifting focus to external tools [63771667-755a-48cc-b90b-b88233365724, 9f79fa99-be69-4ca0-bec2-0d22fccea0b4, a5ec8d5a-9efd-4eab-9623-8a3b0616e387]",
+            "severity": "medium",
+            "artifact_ids": [
+              "63771667-755a-48cc-b90b-b88233365724",
+              "9f79fa99-be69-4ca0-bec2-0d22fccea0b4",
+              "a5ec8d5a-9efd-4eab-9623-8a3b0616e387"
+            ],
+            "explanation": "Early morning activity centered on legitimate work bookmarks and the Alpha Project Dashboard, establishing a baseline of authorized access before the user transitioned to researching and downloading external file transfer utilities."
+          },
+          {
+            "lead": "Notable temporal gaps exist between recorded browsing events [96a03746-a209-4aec-af1c-661ea5142a8f, 79bfe5d0-1b38-49f5-97db-6a2933d216a7, 58457db6-8e4a-469c-a27c-5cb69869cc95, 20337e17-1732-47cb-85a6-be11f42e1393]",
+            "severity": "low",
+            "artifact_ids": [
+              "96a03746-a209-4aec-af1c-661ea5142a8f",
+              "79bfe5d0-1b38-49f5-97db-6a2933d216a7",
+              "58457db6-8e4a-469c-a27c-5cb69869cc95",
+              "20337e17-1732-47cb-85a6-be11f42e1393"
+            ],
+            "explanation": "Periods of approximately 1 hour 37 minutes and 1 hour 21 minutes show no recorded activity, which may indicate the use of private browsing modes, manual history clearing, or extended periods away from the workstation."
+          }
+        ],
+        "timeline": [
+          {
+            "timestamp": "2024-06-12T08:40:00Z",
+            "event": "User bookmarked 'Employee Handbook' at URL https://nexacorp.internal/employee-handbook [9f79fa99-be69-4ca0-bec2-0d22fccea0b4]",
+            "artifact_id": "9f79fa99-be69-4ca0-bec2-0d22fccea0b4"
+          },
+          {
+            "timestamp": "2024-06-12T09:00:00Z",
+            "event": "User bookmarked 'NexaCorp Helpdesk' at URL https://nexacorp.internal/helpdesk [a5ec8d5a-9efd-4eab-9623-8a3b0616e387]",
+            "artifact_id": "a5ec8d5a-9efd-4eab-9623-8a3b0616e387"
+          },
+          {
+            "timestamp": "2024-06-12T09:42:00Z",
+            "event": "User visited Alpha Project Dashboard at URL https://nexacorp.internal/projects/alpha [63771667-755a-48cc-b90b-b88233365724]",
+            "artifact_id": "63771667-755a-48cc-b90b-b88233365724"
+          },
+          {
+            "timestamp": "2024-06-12T09:58:00Z",
+            "event": "User performed two Google searches: 'project timeline management' and 'healthy lunch ideas' [d4fa2f96-f394-4533-b4e1-511363b6ea66, 96a03746-a209-4aec-af1c-661ea5142a8f]",
+            "artifact_id": "d4fa2f96-f394-4533-b4e1-511363b6ea66, 96a03746-a209-4aec-af1c-661ea5142a8f"
+          },
+          {
+            "timestamp": "2024-06-12T11:35:00Z",
+            "event": "User searched for 'nexacorp VPN logs monitored' using DuckDuckGo [79bfe5d0-1b38-49f5-97db-6a2933d216a7]",
+            "artifact_id": "79bfe5d0-1b38-49f5-97db-6a2933d216a7"
+          },
+          {
+            "timestamp": "2024-06-12T12:18:00Z",
+            "event": "User performed two Google searches: 'mega sync client' and 'rclone vs robocopy' [a71a3f4d-f9a2-4a7c-bf10-c0ee895b9df8, 386088cb-2431-4799-88c0-d29b5803fd51]",
+            "artifact_id": "a71a3f4d-f9a2-4a7c-bf10-c0ee895b9df8, 386088cb-2431-4799-88c0-d29b5803fd51"
+          },
+          {
+            "timestamp": "2024-06-12T12:27:00Z",
+            "event": "User visited Google Drive at URL https://drive.google.com/ [58457db6-8e4a-469c-a27c-5cb69869cc95]",
+            "artifact_id": "58457db6-8e4a-469c-a27c-5cb69869cc95"
+          },
+          {
+            "timestamp": "2024-06-12T13:48:00Z",
+            "event": "User downloaded '7z2301-x64.exe' from https://www.7-zip.org/a/7z2301-x64.exe, flagged as dangerous_file [20337e17-1732-47cb-85a6-be11f42e1393]",
+            "artifact_id": "20337e17-1732-47cb-85a6-be11f42e1393"
+          },
+          {
+            "timestamp": "2024-06-12T14:15:00Z",
+            "event": "User downloaded 'MEGAsyncSetup64.exe' from https://mega.nz/desktop/MEGAsyncSetup64.exe, flagged as dangerous_file [24522944-bdf4-4676-ad4b-2cd766cbf864]",
+            "artifact_id": "24522944-bdf4-4676-ad4b-2cd766cbf864"
+          }
+        ],
+        "gaps": [
+          {
+            "gap_start": "2024-06-12T09:58:00Z",
+            "gap_end": "2024-06-12T11:35:00Z",
+            "note": "Approximately 1 hour 37 minutes of no recorded activity follows a lunch search and precedes a privacy-focused search for VPN log monitoring. This gap may indicate use of private browsing, manual history deletion, or extended time away from the device."
+          },
+          {
+            "gap_start": "2024-06-12T12:27:00Z",
+            "gap_end": "2024-06-12T13:48:00Z",
+            "note": "Approximately 1 hour 21 minutes of no recorded activity occurs after visiting Google Drive and before downloading compression software. This period warrants investigation as it could represent unrecorded browsing sessions or deliberate history clearing prior to tool acquisition."
+          }
+        ],
+        "summary": "The user's browser activity on 2024-06-12 demonstrates a clear progression from routine work tasks to researching and downloading third-party synchronization and compression utilities. Highly suspicious patterns include querying corporate VPN log monitoring via DuckDuckGo and acquiring files explicitly flagged as dangerous, which collectively suggest preparation for unauthorized data transfer. Two significant temporal gaps in the timeline require further scrutiny as they may indicate private browsing usage or intentional history deletion.",
+        "hallucination_warnings": [
+          {
+            "artifact_id": "d4fa2f96-f394-4533-b4e1-511363b6ea66, 96a03746-a209-4aec-af1c-661ea5142a8f",
+            "message": "Citation to artifact_id d4fa2f96-f394-4533-b4e1-511363b6ea66, 96a03746-a209-4aec-af1c-661ea5142a8f not found in retrieved set"
+          },
+          {
+            "artifact_id": "a71a3f4d-f9a2-4a7c-bf10-c0ee895b9df8, 386088cb-2431-4799-88c0-d29b5803fd51",
+            "message": "Citation to artifact_id a71a3f4d-f9a2-4a7c-bf10-c0ee895b9df8, 386088cb-2431-4799-88c0-d29b5803fd51 not found in retrieved set"
+          }
+        ],
+        "artifact_ids_used": [
+          "96a03746-a209-4aec-af1c-661ea5142a8f",
+          "58457db6-8e4a-469c-a27c-5cb69869cc95",
+          "24522944-bdf4-4676-ad4b-2cd766cbf864",
+          "d4fa2f96-f394-4533-b4e1-511363b6ea66",
+          "a71a3f4d-f9a2-4a7c-bf10-c0ee895b9df8",
+          "79bfe5d0-1b38-49f5-97db-6a2933d216a7",
+          "9f79fa99-be69-4ca0-bec2-0d22fccea0b4",
+          "386088cb-2431-4799-88c0-d29b5803fd51",
+          "a5ec8d5a-9efd-4eab-9623-8a3b0616e387",
+          "20337e17-1732-47cb-85a6-be11f42e1393",
+          "63771667-755a-48cc-b90b-b88233365724"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+    # Morning cover traffic 08:30-10:00 (10)
+    history_001, "https://nexacorp.internal/home", 
+    "NexaCorp Home", "2024-06-12T08:30:00Z", 2, "LINK"
+    history_002, "https://nexacorp.internal/hr/benefits", 
+    "Benefits Portal", "2024-06-12T08:42:00Z", 1, "LINK"
+    history_003, "https://news.bbc.co.uk/world", 
+    "BBC News - World", "2024-06-12T08:55:00Z", 1, "LINK"
+    history_004, "https://www.bbc.com/news/business", 
+    "BBC News - Business", "2024-06-12T09:05:00Z", 1, "LINK"
+    history_005, "https://www.linkedin.com/feed/", 
+    "LinkedIn Feed", "2024-06-12T09:18:00Z", 1, "LINK"
+    history_006, "https://outlook.office.com/mail/inbox", 
+    "Outlook Mail", "2024-06-12T09:30:00Z", 1, "LINK"
+    history_007, "https://nexacorp.internal/projects/alpha", 
+    "Alpha Project Dashboard", "2024-06-12T09:42:00Z", 1, "LINK"
+    history_008, "https://www.cnn.com/2024/06/12/business/global-markets/index.html", 
+    "Global Markets | CNN", "2024-06-12T09:55:00Z", 1, "LINK"
+    history_009, "https://www.google.com/search?q=project+timeline+management", 
+    "project timeline management - Google Search", "2024-06-12T09:58:00Z", 1, "LINK"
+    history_010, "https://nexacorp.internal/dashboard", 
+    "NexaCorp Employee Dashboard", "2024-06-12T10:05:00Z", 1, "LINK"
+
+    # Exfiltration research 10:15-11:45 (10)
+    history_011, "https://www.duckduckgo.com/?q=best+secure+file+transfer", 
+    "best secure file transfer — DuckDuckGo", "2024-06-12T10:15:00Z", 1, "LINK"
+    history_012, "https://www.cyberforum.com/threads/secure-file-transfer-tools.12345/", 
+    "Secure File Transfer Tools - CyberForum", "2024-06-12T10:24:00Z", 1, "LINK"
+    history_013, "https://www.duckduckgo.com/?q=how+to+copy+files+to+cloud+undetected", 
+    "how to copy files to cloud undetected — DuckDuckGo", "2024-06-12T10:35:00Z", 1, "LINK"
+    history_014, "https://privacy.stackexchange.com/questions/12345/how-to-send-large-files-anonymously", 
+    "How to send large files anonymously - Privacy.SE", "2024-06-12T10:45:00Z", 1, "LINK"
+    history_015, "https://www.duckduckgo.com/?q=meganz+vs+dropbox+privacy", 
+    "meganz vs dropbox privacy — DuckDuckGo", "2024-06-12T10:52:00Z", 1, "LINK"
+    history_016, "https://www.reddit.com/r/privacy/comments/abcd12/meganz_vs_dropbox_privacy/", 
+    "MegaNZ vs Dropbox Privacy - Reddit", "2024-06-12T10:58:00Z", 1, "LINK"
+    history_017, "https://www.duckduckgo.com/?q=veracrypt+tutorial", 
+    "veracrypt tutorial — DuckDuckGo", "2024-06-12T11:10:00Z", 1, "LINK"
+    history_018, "https://www.veracrypt.fr/en/Downloads.html", 
+    "VeraCrypt Downloads", "2024-06-12T11:18:00Z", 1, "LINK"
+    history_019, "https://www.duckduckgo.com/?q=how+to+exfiltrate+data+from+corporate+network", 
+    "how to exfiltrate data from corporate network — DuckDuckGo", "2024-06-12T11:27:00Z", 1, "LINK"
+    history_020, "https://www.sans.org/white-papers/how-to-transfer-files-securely/", 
+    "How to Transfer Files Securely - SANS", "2024-06-12T11:35:00Z", 1, "LINK"
+
+    # Cloud storage and transfer 11:45-12:30 (8)
+    history_021, "https://mega.nz/desktop", "MEGA Desktop Sync", "2024-06-12T11:45:00Z", 1, "TYPED"
+    history_022, "https://www.wetransfer.com/", "WeTransfer - Send Large Files", "2024-06-12T11:52:00Z", 1, "LINK"
+    history_023, "https://send.tresorit.com/", "Tresorit Send", "2024-06-12T11:59:00Z", 1, "LINK"
+    history_024, "https://proton.me/drive", "Proton Drive", "2024-06-12T12:05:00Z", 1, "TYPED"
+    history_025, "https://www.wetransfer.com/downloads", "WeTransfer Download", "2024-06-12T12:12:00Z", 1, "LINK"
+    history_026, "https://www.google.com/search?q=mega+sync+client", "mega sync client - Google Search", "2024-06-12T12:18:00Z", 1, "LINK"
+    history_027, "https://www.tresorit.com/", "Tresorit - Encrypted File Sharing", "2024-06-12T12:22:00Z", 1, "LINK"
+    history_028, "https://drive.google.com/", "Google Drive", "2024-06-12T12:27:00Z", 1, "LINK"
+
+
+    search_001, "how to transfer large files securely without it company knowing", 
+    "DuckDuckGo", "2024-06-12T10:15:00Z", 
+    "https://www.duckduckgo.com/?q=how+to+transfer+large+files+securely+without+it+company+knowing"
+    search_002, "best cloud storage no logs", "DuckDuckGo", "2024-06-12T10:52:00Z", 
+    "https://www.duckduckgo.com/?q=best+cloud+storage+no+logs"
+    search_003, "rclone tutorial sync to mega", "DuckDuckGo", "2024-06-12T11:00:00Z", 
+    "https://www.duckduckgo.com/?q=rclone+tutorial+sync+to+mega"
+    search_004, "veracrypt hidden volume how to", "DuckDuckGo", "2024-06-12T11:10:00Z", 
+    "https://www.duckduckgo.com/?q=veracrypt+hidden+volume+how+to"
+    search_005, "7zip encrypt archive password", "DuckDuckGo", "2024-06-12T11:20:00Z", 
+    "https://www.duckduckgo.com/?q=7zip+encrypt+archive+password"
+    search_006, "nexacorp VPN logs monitored", "DuckDuckGo", "2024-06-12T11:35:00Z", 
+    "https://www.duckduckgo.com/?q=nexacorp+VPN+logs+monitored"
+    search_007, "latest market news", "Google", "2024-06-12T08:55:00Z", 
+    "https://www.google.com/search?q=latest+market+news"
+    search_008, "corporate wellness program", "Google", "2024-06-12T09:18:00Z", 
+    "https://www.google.com/search?q=corporate+wellness+program"
+    search_009, "healthy lunch ideas", "Google", "2024-06-12T09:58:00Z", 
+    "https://www.google.com/search?q=healthy+lunch+ideas"
+    search_010, "sports highlights", "Google", "2024-06-12T10:40:00Z", 
+    "https://www.google.com/search?q=sports+highlights"
+    search_011, "news headlines today", "Google", "2024-06-12T12:10:00Z",
+     "https://www.google.com/search?q=news+headlines+today"
+    search_012, "rclone vs robocopy", "Google", "2024-06-12T12:18:00Z", 
+    "https://www.google.com/search?q=rclone+vs+robocopy"
+    search_013, "secure file sharing tools", "Google", "2024-06-12T12:25:00Z", 
+    "https://www.google.com/search?q=secure+file+sharing+tools"
+    search_014, "best tech podcasts", "Google", "2024-06-12T15:10:00Z", 
+    "https://www.google.com/search?q=best+tech+podcasts"
+    search_015, "weather tomorrow", "Google", "2024-06-12T16:05:00Z", 
+    "https://www.google.com/search?q=weather+tomorrow"
+  
+        "download_001",
+        "https://nexacorp.internal/reports/Q2_financials.xlsx",
+        "https://nexacorp.internal/reports/",
+        "C:/Users/james.wright/Downloads/Q2_financials.xlsx",
+        "Q2_financials.xlsx",
+        2457600,
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "2024-06-12T13:35:00Z",
+        "2024-06-12T13:35:04Z",
+        "complete",
+        "safe",
+    
+    
+        "download_002",
+        "https://www.7-zip.org/a/7z2301-x64.exe",
+        "https://www.7-zip.org/download.html",
+        "C:/Users/james.wright/Downloads/7z2301-x64.exe",
+        "7z2301-x64.exe",
+        1545728,
+        "application/x-msdownload",
+        "2024-06-12T13:48:00Z",
+        "2024-06-12T13:48:22Z",
+        "complete",
+        "dangerous_file",
+    
+    
+        "download_003",
+        "https://github.com/rclone/rclone/releases/download/v1.66.0/rclone-v1.66.0-windows-amd64.zip",
+        "https://rclone.org/install/",
+        "C:/Users/james.wright/Downloads/rclone-v1.66.0-windows-amd64.zip",
+        "rclone-v1.66.0-windows-amd64.zip",
+        46137344,
+        "application/zip",
+        "2024-06-12T14:05:00Z",
+        "2024-06-12T14:06:10Z",
+        "complete",
+        "safe",
+    
+    
+        "download_004",
+        "https://mega.nz/desktop/MEGAsyncSetup64.exe",
+        "https://mega.nz/desktop",
+        "C:/Users/james.wright/Downloads/MEGAsyncSetup64.exe",
+        "MEGAsyncSetup64.exe",
+        9175040,
+        "application/x-msdownload",
+        "2024-06-12T14:15:00Z",
+        "2024-06-12T14:15:58Z",
+        "complete",
+        "dangerous_file",
+    
+    
+        "download_005",
+        "https://veracrypt.fr/en/Downloads.html",
+        "https://veracrypt.fr/en/Downloads.html",
+        "C:/Users/james.wright/Downloads/VeraCrypt_Setup_x64_1.26.14.exe",
+        "VeraCrypt_Setup_x64_1.26.14.exe",
+        35127296,
+        "application/x-msdownload",
+        "2024-06-12T14:22:00Z",
+        "2024-06-12T14:23:15Z",
+        "complete",
+        "dangerous_file",
+    
+    
+        "download_006",
+        "https://nexacorp.internal/hr/employee_directory.csv",
+        "https://nexacorp.internal/hr/",
+        "C:/Users/james.wright/Downloads/employee_directory.csv",
+        "employee_directory.csv",
+        512000,
+        "text/csv",
+        "2024-06-12T14:35:00Z",
+        "2024-06-12T14:35:02Z",
+        "complete",
+        "safe",
+    
+
+
+
+    bookmark_001, "https://mega.nz/", "MEGA Cloud Storage", 
+    "Bookmarks Bar > Personal", "2024-06-12T14:45:00Z
+    bookmark_002, "https://proton.me/mail", "Proton Mail", 
+    "Bookmarks Bar > Personal", "2024-06-12T15:10:00Z
+    bookmark_003, "https://rclone.org/", "Rclone — rsync for cloud storage", 
+    "Bookmarks Bar > Personal > Tools", "2024-06-12T14:50:00Z
+    bookmark_004, "https://www.veracrypt.fr/", "VeraCrypt - Free Open-Source Disk Encryption", 
+    "Bookmarks Bar > Personal > Tools", "2024-06-12T15:00:00Z
+    bookmark_005, "https://signal.org/", "Signal >> Home", 
+    "Bookmarks Bar > Personal > Comms", "2024-06-12T15:20:00Z
+    bookmark_006, "https://telegram.org/", "Telegram Web", 
+    "Bookmarks Bar > Personal > Comms", "2024-06-12T15:25:00Z
+    bookmark_007, "https://nexacorp.internal/employee-handbook", "Employee Handbook", 
+    "Bookmarks Bar > Work", "2024-06-12T08:40:00Z
+    bookmark_008, "https://nexacorp.internal/helpdesk", "NexaCorp Helpdesk", 
+    "Bookmarks Bar > Work", "2024-06-12T09:00:00Z
