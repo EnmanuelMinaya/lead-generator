@@ -11,6 +11,8 @@ HEALTH_URL = f"{SERVER_URL}/health"
 INGEST_URL = f"{SERVER_URL}/ingest"
 QUERY_URL = f"{SERVER_URL}/query"
 OUTPUT_DIR = os.path.join(os.getcwd(), "test_output_fraud")
+USE_DECOMPOSITION = True
+TOP_K = 15
 CASE_ID = "CASE-2024-002"
 SOURCE_DB_PATH = "C:/Users/sarah.chen/AppData/Local/Google/Chrome/User Data/Default/History"
 SOURCE_DB_HASH = "b7e2d4f1a3c5908712345678901234567890abcdef1234567890abcdef98765432"
@@ -411,9 +413,9 @@ def run_queries():
         payload = {
             "question": q["question"],
             "autopsy_case_id": CASE_ID,
-            "top_k": 15,
+            "top_k": TOP_K,
             "artifact_types": q["artifact_types"],
-            "use_decomposition": True,
+            "use_decomposition": USE_DECOMPOSITION,
         }
         resp = requests.post(QUERY_URL, json=payload, timeout=600)
         if not resp.ok:
@@ -466,11 +468,13 @@ def main():
     total_hallucination_warnings = sum(len(item["hallucination_warnings"]) for item in query_results)
 
     print("\nSummary:")
-    print(f"  Scenario: Financial Fraud / Identity Theft")
+    print(f"  Scenario: Financial Fraud")
     print(f"  Case ID: {CASE_ID}")
     print(f"  User: {OS_USER_ACCOUNT}")
     print(f"  Total artifacts ingested: {len(all_records)}")
     print("  Total queries run: 5")
+    print(f"  Use decomposition: {USE_DECOMPOSITION}")
+    print(f"  Top k: {TOP_K}")
     print(f"  Total leads generated: {total_leads}")
     print(f"  Total hallucination warnings: {total_hallucination_warnings}")
     print(f"  Output written to: {OUTPUT_DIR}")

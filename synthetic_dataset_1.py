@@ -11,11 +11,13 @@ HEALTH_URL = f"{SERVER_URL}/health"
 INGEST_URL = f"{SERVER_URL}/ingest"
 QUERY_URL = f"{SERVER_URL}/query"
 OUTPUT_DIR = os.path.join(os.getcwd(), "test_output")
-ARTIFACT_CASE_ID = "CASE-2024-001"
+USE_DECOMPOSITION = True
+TOP_K = 20
+CASE_ID = "CASE-2024-001"
 SOURCE_DB_PATH = "C:/Users/james.wright/AppData/Local/Google/Chrome/User Data/Default/History"
 SOURCE_DB_HASH = "a3f1c2e4b5d6789012345678901234567890abcdef1234567890abcdef12345678"
 OS_USER_ACCOUNT = "james.wright"
-AUTOPSY_CASE_ID = ARTIFACT_CASE_ID
+AUTOPSY_CASE_ID = CASE_ID
 
 
 def ensure_output_dir():
@@ -288,7 +290,7 @@ def build_all_records():
 def build_ground_truth():
     return {
         "scenario": "insider_threat_exfiltration",
-        "case_id": ARTIFACT_CASE_ID,
+        "case_id": CASE_ID,
         "os_user_account": OS_USER_ACCOUNT,
         "date": "2024-06-12",
         "expected_leads": [
@@ -391,9 +393,11 @@ def run_queries():
     for q in queries:
         payload = {
             "question": q["question"],
-            "autopsy_case_id": ARTIFACT_CASE_ID,
-            "top_k": 15,
+            "autopsy_case_id": CASE_ID,
+            "top_k": TOP_K,
             "artifact_types": q["artifact_types"],
+            "use_decomposition": USE_DECOMPOSITION,
+
         }
         resp = requests.post(QUERY_URL, json=payload, timeout=120)
         if not resp.ok:
@@ -437,7 +441,7 @@ def main():
     print("Running evaluation queries...")
     query_results = run_queries()
     evaluation_data = {
-        "case_id": ARTIFACT_CASE_ID,
+        "case_id": CASE_ID,
         "queries": query_results,
     }
     write_output_file("evaluation_results.json", evaluation_data)
@@ -446,8 +450,12 @@ def main():
     total_hallucination_warnings = sum(len(item["hallucination_warnings"]) for item in query_results)
 
     print("\nSummary:")
+    print(f"  Scenario: Insider threat and data exfiltration")
+    print(f"  Case ID: {CASE_ID}")
     print(f"  Total artifacts ingested: {len(all_records)}")
     print("  Total queries run: 5")
+    print(f"  Use decomposition: {USE_DECOMPOSITION}")
+    print(f"  Top k: {TOP_K}")
     print(f"  Total leads generated: {total_leads}")
     print(f"  Total hallucination warnings: {total_hallucination_warnings}")
     print(f"  Output written to: {OUTPUT_DIR}")
