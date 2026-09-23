@@ -5,7 +5,7 @@
       "query_id": "Q001",
       "question": "What suspicious activity did this user carry out on 2024-09-03?",
       "artifacts_retrieved": 10,
-      "leads_generated": 3,
+      "leads_generated": 5,
       "hallucination_warnings": [],
       "raw_response": {
         "question": "What suspicious activity did this user carry out on 2024-09-03?",
@@ -13,79 +13,106 @@
         "artifacts_retrieved": 10,
         "leads": [
           {
-            "lead": "User visited a Pastebin page explicitly labeled 'fullz', indicating direct engagement with repositories of stolen financial credentials [214f37b9-0a98-45c3-849f-a78e650c941a]",
+            "lead": "User conducted explicit searches regarding cryptocurrency-based money laundering techniques. [c4fa9f3e-df56-433b-9c52-77d91cbcdeea]",
             "severity": "high",
             "artifact_ids": [
-              "214f37b9-0a98-45c3-849f-a78e650c941a"
+              "c4fa9f3e-df56-433b-9c52-77d91cbcdeea"
             ],
-            "explanation": "The term 'fullz' is industry slang for complete sets of stolen personally identifiable information (PII) and payment card data. Visiting this page demonstrates active reconnaissance for illicit financial data."
+            "explanation": "Directly indicates intent to learn methods for obscuring illicit funds, forming a primary basis for financial crime investigation."
           },
           {
-            "lead": "User conducted sequential searches for cryptocurrency anonymity ('monero vs bitcoin') and TOR-based dark web marketplaces, suggesting preparation for untraceable transactions or illicit access [965bc859-962e-4c68-94e1-21e1c61f58c4, 8152bc46-63f9-4b81-9b55-fa45e2a2dd68, d457482c-e391-40a6-a8a3-2911708db527]",
-            "severity": "high",
+            "lead": "User researched privacy coins and compared their anonymity features to Bitcoin. [f99fab3e-8b97-435a-97ba-42680d06e78d, 41183f70-bbf3-40a1-b407-26e821f1ff96]",
+            "severity": "medium",
             "artifact_ids": [
-              "965bc859-962e-4c68-94e1-21e1c61f58c4",
-              "8152bc46-63f9-4b81-9b55-fa45e2a2dd68",
-              "d457482c-e391-40a6-a8a3-2911708db527"
+              "f99fab3e-8b97-435a-97ba-42680d06e78d",
+              "41183f70-bbf3-40a1-b407-26e821f1ff96"
             ],
-            "explanation": "Monero is a privacy-focused cryptocurrency designed to obscure transaction trails. Combining this research with searches for TOR dark web markets indicates deliberate steps to establish anonymous communication channels and untraceable payment methods, likely to launder or move illicit funds."
+            "explanation": "Suggests active evaluation of alternative cryptocurrencies specifically chosen for transactional privacy, often used to bypass standard financial tracking."
           },
           {
-            "lead": "User downloaded a large internal bank transaction log CSV file immediately after researching dark web access and cryptocurrency anonymity, strongly indicating potential data exfiltration for fraudulent purposes [2fc2a107-5203-4c2d-ae6c-a3db314438a2, 166df419-7742-48bf-9d4f-387aa8aaf44f]",
+            "lead": "User searched for dark web market access tools and subsequently downloaded the Tor Browser. [565403f6-b7c1-4ee3-8fc3-d139a399f377, 532fa04f-8e8f-4128-8c17-4f18c96cf335, 2371f2c6-b7be-4416-b4c3-2f256f60cee0]",
             "severity": "high",
             "artifact_ids": [
-              "2fc2a107-5203-4c2d-ae6c-a3db314438a2",
-              "166df419-7742-48bf-9d4f-387aa8aaf44f"
+              "565403f6-b7c1-4ee3-8fc3-d139a399f377",
+              "532fa04f-8e8f-4128-8c17-4f18c96cf335",
+              "2371f2c6-b7be-4416-b4c3-2f256f60cee0"
             ],
-            "explanation": "Downloading a ~1MB transaction log from an internal banking server (`bank.internal`) directly following illicit reconnaissance suggests the data was extracted to facilitate fraud, money laundering, or further sale on dark web markets. The timing correlation elevates this from routine administrative work to suspected insider threat activity."
+            "explanation": "The download was explicitly flagged as a dangerous file, and the preceding searches indicate preparation to operate outside standard web monitoring environments."
+          },
+          {
+            "lead": "User downloaded a complete monthly transaction log from an internal banking portal. [861a5dd2-bcf8-4606-9702-2432061ddf9c]",
+            "severity": "high",
+            "artifact_ids": [
+              "861a5dd2-bcf8-4606-9702-2432061ddf9c"
+            ],
+            "explanation": "Acquisition of bulk financial data aligns with the earlier money laundering research, potentially indicating preparation for large-scale fund movement or cover-up."
+          },
+          {
+            "lead": "User bookmarked both the Tor Project and a Bitcoin mixing service. [7a41a2ce-5d1e-475e-b5e1-5c64e96a7489, 45263e8a-9ab2-414f-892b-4db270fed3e8]",
+            "severity": "high",
+            "artifact_ids": [
+              "7a41a2ce-5d1e-475e-b5e1-5c64e96a7489",
+              "45263e8a-9ab2-414f-892b-4db270fed3e8"
+            ],
+            "explanation": "Saving these specific resources indicates planned, repeated use of anonymity networks and transaction obfuscation services."
           }
         ],
         "timeline": [
           {
-            "timestamp": "2024-09-03T09:00:00Z",
-            "event": "User bookmarked the internal 'Bank Helpdesk' URL [31fffd8f-69e3-44ca-87f7-c1f2281d58c1]",
-            "artifact_id": "31fffd8f-69e3-44ca-87f7-c1f2281d58c1"
+            "timestamp": "2024-09-03T11:36:00Z",
+            "event": "User performed a DuckDuckGo search for 'how to launder money through crypto'. [c4fa9f3e-df56-433b-9c52-77d91cbcdeea]",
+            "artifact_id": "c4fa9f3e-df56-433b-9c52-77d91cbcdeea"
           },
           {
-            "timestamp": "2024-09-03T09:12:00Z",
-            "event": "User searched for 'Q3 financial reporting deadlines' using Google [5c268d75-a5a4-4d86-ba5e-80c02ea504e6]",
-            "artifact_id": "5c268d75-a5a4-4d86-ba5e-80c02ea504e6"
-          },
-          {
-            "timestamp": "2024-09-03T10:58:00Z",
-            "event": "User visited a Pastebin page explicitly labeled 'dump \u2014 fullz' [214f37b9-0a98-45c3-849f-a78e650c941a]",
-            "artifact_id": "214f37b9-0a98-45c3-849f-a78e650c941a"
+            "timestamp": "2024-09-03T11:45:00Z",
+            "event": "User visited a Security Stack Exchange page discussing credit card fraud. [eaf083c1-51dc-4385-8476-c23fe9d42468]",
+            "artifact_id": "eaf083c1-51dc-4385-8476-c23fe9d42468"
           },
           {
             "timestamp": "2024-09-03T12:25:00Z",
-            "event": "User visited DuckDuckGo results for 'monero vs bitcoin anonymity' [965bc859-962e-4c68-94e1-21e1c61f58c4]",
-            "artifact_id": "965bc859-962e-4c68-94e1-21e1c61f58c4"
+            "event": "User searched for and visited results comparing Monero and Bitcoin anonymity features. [f99fab3e-8b97-435a-97ba-42680d06e78d, 41183f70-bbf3-40a1-b407-26e821f1ff96]",
+            "artifact_id": "f99fab3e-8b97-435a-97ba-42680d06e78d"
           },
           {
             "timestamp": "2024-09-03T12:30:00Z",
-            "event": "User searched for 'tor browser dark web markets' using DuckDuckGo [d457482c-e391-40a6-a8a3-2911708db527]",
-            "artifact_id": "d457482c-e391-40a6-a8a3-2911708db527"
+            "event": "User searched for and visited results related to using the Tor browser for dark web markets. [565403f6-b7c1-4ee3-8fc3-d139a399f377, 532fa04f-8e8f-4128-8c17-4f18c96cf335]",
+            "artifact_id": "565403f6-b7c1-4ee3-8fc3-d139a399f377"
+          },
+          {
+            "timestamp": "2024-09-03T14:05:00Z",
+            "event": "User downloaded the portable Tor Browser executable, which was classified as a dangerous file. [2371f2c6-b7be-4416-b4c3-2f256f60cee0]",
+            "artifact_id": "2371f2c6-b7be-4416-b4c3-2f256f60cee0"
           },
           {
             "timestamp": "2024-09-03T14:35:00Z",
-            "event": "User downloaded 'transaction_log_aug2024.csv' from the internal bank server [2fc2a107-5203-4c2d-ae6c-a3db314438a2]",
-            "artifact_id": "2fc2a107-5203-4c2d-ae6c-a3db314438a2"
+            "event": "User downloaded a CSV file containing August 2024 transaction logs from an internal banking URL. [861a5dd2-bcf8-4606-9702-2432061ddf9c]",
+            "artifact_id": "861a5dd2-bcf8-4606-9702-2432061ddf9c"
+          },
+          {
+            "timestamp": "2024-09-03T15:05:00Z",
+            "event": "User bookmarked the official Tor Project website. [7a41a2ce-5d1e-475e-b5e1-5c64e96a7489]",
+            "artifact_id": "7a41a2ce-5d1e-475e-b5e1-5c64e96a7489"
+          },
+          {
+            "timestamp": "2024-09-03T15:25:00Z",
+            "event": "User bookmarked a Bitcoin mixing service website. [45263e8a-9ab2-414f-892b-4db270fed3e8]",
+            "artifact_id": "45263e8a-9ab2-414f-892b-4db270fed3e8"
           }
         ],
         "gaps": [],
-        "summary": "On 2024-09-03, the user transitioned from routine banking administration to conducting targeted reconnaissance for illicit financial operations, including visiting stolen credential dumps, researching cryptocurrency anonymity, and searching for dark web marketplaces. This pattern culminates in the download of a large internal transaction log file, strongly indicating preparation for data exfiltration and subsequent fraud or money laundering. The rapid escalation from legitimate work tasks to covert financial research warrants immediate investigation into potential insider threat activity.",
+        "summary": "On 2024-09-03, the user engaged in a highly coordinated sequence of research and preparation focused on cryptocurrency-based financial obfuscation. Activities progressed from explicit money laundering queries and privacy coin comparisons to downloading the Tor Browser, acquiring internal bank transaction logs, and bookmarking anonymity tools and mixing services. This pattern strongly suggests premeditated steps to conceal financial movements and access restricted networks.",
         "hallucination_warnings": [],
         "artifact_ids_used": [
-          "8152bc46-63f9-4b81-9b55-fa45e2a2dd68",
-          "d457482c-e391-40a6-a8a3-2911708db527",
-          "31fffd8f-69e3-44ca-87f7-c1f2281d58c1",
-          "2fc2a107-5203-4c2d-ae6c-a3db314438a2",
-          "af96d550-0338-4654-8102-e1c801791693",
-          "1324a8ba-8b2a-4142-aa63-eed0c6f3cb37",
-          "965bc859-962e-4c68-94e1-21e1c61f58c4",
-          "166df419-7742-48bf-9d4f-387aa8aaf44f",
-          "214f37b9-0a98-45c3-849f-a78e650c941a",
-          "5c268d75-a5a4-4d86-ba5e-80c02ea504e6"
+          "7a41a2ce-5d1e-475e-b5e1-5c64e96a7489",
+          "861a5dd2-bcf8-4606-9702-2432061ddf9c",
+          "45263e8a-9ab2-414f-892b-4db270fed3e8",
+          "c4fa9f3e-df56-433b-9c52-77d91cbcdeea",
+          "41183f70-bbf3-40a1-b407-26e821f1ff96",
+          "eaf083c1-51dc-4385-8476-c23fe9d42468",
+          "565403f6-b7c1-4ee3-8fc3-d139a399f377",
+          "f99fab3e-8b97-435a-97ba-42680d06e78d",
+          "2371f2c6-b7be-4416-b4c3-2f256f60cee0",
+          "532fa04f-8e8f-4128-8c17-4f18c96cf335"
         ]
       }
     },
@@ -93,7 +120,7 @@
       "query_id": "Q002",
       "question": "Did the user show intent to exfiltrate data? What evidence supports this?",
       "artifacts_retrieved": 6,
-      "leads_generated": 5,
+      "leads_generated": 4,
       "hallucination_warnings": [],
       "raw_response": {
         "question": "Did the user show intent to exfiltrate data? What evidence supports this?",
@@ -101,86 +128,81 @@
         "artifacts_retrieved": 6,
         "leads": [
           {
-            "lead": "User accessed the internal bank Operations Dashboard immediately before conducting suspicious searches [8d63061e-ddef-4590-83fc-db5cc8d5564a, 87f7afdd-5f3b-4211-ae04-1229cdbf71e9]",
+            "lead": "User searched for 'how to launder money through crypto' using DuckDuckGo [c4fa9f3e-df56-433b-9c52-77d91cbcdeea]",
             "severity": "high",
             "artifact_ids": [
-              "8d63061e-ddef-4590-83fc-db5cc8d5564a",
-              "87f7afdd-5f3b-4211-ae04-1229cdbf71e9"
+              "c4fa9f3e-df56-433b-9c52-77d91cbcdeea"
             ],
-            "explanation": "Establishes initial presence on a sensitive corporate system, creating a baseline for subsequent malicious research and indicating potential unauthorized access or misuse of legitimate credentials."
+            "explanation": "Direct inquiry into cryptocurrency laundering techniques indicates preparation for obscuring financial trails after acquiring value."
           },
           {
-            "lead": "User performed a web search for methods to utilize stolen credit cards without detection [077ce27b-0512-44ec-92df-4751d03506e7]",
+            "lead": "User visited a DuckDuckGo search result comparing Monero and Bitcoin anonymity features [f99fab3e-8b97-435a-97ba-42680d06e78d]",
+            "severity": "medium",
+            "artifact_ids": [
+              "f99fab3e-8b97-435a-97ba-42680d06e78d"
+            ],
+            "explanation": "Researching privacy-focused cryptocurrencies demonstrates an interest in untraceable digital assets, which may correlate with plans to hide transaction origins or proceeds."
+          },
+          {
+            "lead": "User visited the Python Downloads page and subsequently searched for a Python Pandas DataFrame tutorial [ce603e3c-f3c2-47b9-adae-5bf4ff227d11][048e013f-7145-42a5-97d6-bde061c3a73c]",
+            "severity": "medium",
+            "artifact_ids": [
+              "ce603e3c-f3c2-47b9-adae-5bf4ff227d11",
+              "048e013f-7145-42a5-97d6-bde061c3a73c"
+            ],
+            "explanation": "Python and Pandas are standard programming tools for data extraction, cleaning, and automation, providing the technical capability to structure large datasets prior to transfer."
+          },
+          {
+            "lead": "User visited the official Tor Browser Downloads page [de8bd502-8107-4498-9767-3d0de8b2f38a]",
             "severity": "high",
             "artifact_ids": [
-              "077ce27b-0512-44ec-92df-4751d03506e7"
+              "de8bd502-8107-4498-9767-3d0de8b2f38a"
             ],
-            "explanation": "Demonstrates clear intent to commit financial fraud and evade law enforcement, indicating active planning of illicit activity rather than casual browsing."
-          },
-          {
-            "lead": "User researched cryptocurrency anonymity by comparing Monero and Bitcoin [8152bc46-63f9-4b81-9b55-fa45e2a2dd68, 85f2f955-97c5-4599-a323-cd1822f99594, dd911f69-2cf3-41d8-b018-63caa2826398]",
-            "severity": "medium",
-            "artifact_ids": [
-              "8152bc46-63f9-4b81-9b55-fa45e2a2dd68",
-              "85f2f955-97c5-4599-a323-cd1822f99594",
-              "dd911f69-2cf3-41d8-b018-63caa2826398"
-            ],
-            "explanation": "Suggests preparation for anonymizing illicit proceeds or communications, which is commonly associated with post-fraud money laundering or securing data transfers."
-          },
-          {
-            "lead": "Multiple identical history and search records were generated for the exact same timestamps and queries [8d63061e-ddef-4590-83fc-db5cc8d5564a, 87f7afdd-5f3b-4211-ae04-1229cdbf71e9, 85f2f955-97c5-4599-a323-cd1822f99594, dd911f69-2cf3-41d8-b018-63caa2826398]",
-            "severity": "medium",
-            "artifact_ids": [
-              "8d63061e-ddef-4590-83fc-db5cc8d5564a",
-              "87f7afdd-5f3b-4211-ae04-1229cdbf71e9",
-              "85f2f955-97c5-4599-a323-cd1822f99594",
-              "dd911f69-2cf3-41d8-b018-63caa2826398"
-            ],
-            "explanation": "Duplicate artifact generation for identical events may indicate automated scripting, browser extension interference, or deliberate log manipulation to obscure true activity frequency."
-          },
-          {
-            "lead": "Current artifacts lack explicit evidence of data exfiltration tools or outbound data transfer commands [077ce27b-0512-44ec-92df-4751d03506e7, 8152bc46-63f9-4b81-9b55-fa45e2a2dd68]",
-            "severity": "low",
-            "artifact_ids": [
-              "077ce27b-0512-44ec-92df-4751d03506e7",
-              "8152bc46-63f9-4b81-9b55-fa45e2a2dd68"
-            ],
-            "explanation": "While preparatory and fraudulent intent is evident, direct evidence of data exfiltration cannot be confirmed from browser history alone."
+            "explanation": "Acquiring Tor software indicates intent to utilize anonymized network routing, a technique frequently employed to mask IP addresses and conceal data transmission endpoints."
           }
         ],
         "timeline": [
           {
-            "timestamp": "2024-09-03T10:00:00Z",
-            "event": "User visited the bank internal Operations Dashboard [8d63061e-ddef-4590-83fc-db5cc8d5564a]",
-            "artifact_id": "8d63061e-ddef-4590-83fc-db5cc8d5564a"
+            "timestamp": "2024-09-03T09:40:00Z",
+            "event": "User searched for 'excel pivot table tutorial' using Google [12f09d5b-2c6b-4d27-bfa9-bad3abf04a6c]",
+            "artifact_id": "12f09d5b-2c6b-4d27-bfa9-bad3abf04a6c"
           },
           {
-            "timestamp": "2024-09-03T10:10:00Z",
-            "event": "User searched DuckDuckGo for 'how to use stolen credit card without getting caught' [077ce27b-0512-44ec-92df-4751d03506e7]",
-            "artifact_id": "077ce27b-0512-44ec-92df-4751d03506e7"
+            "timestamp": "2024-09-03T11:36:00Z",
+            "event": "User searched for 'how to launder money through crypto' using DuckDuckGo [c4fa9f3e-df56-433b-9c52-77d91cbcdeea]",
+            "artifact_id": "c4fa9f3e-df56-433b-9c52-77d91cbcdeea"
           },
           {
             "timestamp": "2024-09-03T12:25:00Z",
-            "event": "User searched DuckDuckGo and visited results for 'monero vs bitcoin anonymity' [8152bc46-63f9-4b81-9b55-fa45e2a2dd68]",
-            "artifact_id": "8152bc46-63f9-4b81-9b55-fa45e2a2dd68"
-          }
-        ],
-        "gaps": [
+            "event": "User visited a DuckDuckGo search result for 'monero vs bitcoin anonymity' [f99fab3e-8b97-435a-97ba-42680d06e78d]",
+            "artifact_id": "f99fab3e-8b97-435a-97ba-42680d06e78d"
+          },
           {
-            "gap_start": "2024-09-03T10:10:00Z",
-            "gap_end": "2024-09-03T12:25:00Z",
-            "note": "Over two hours of unrecorded browser activity occurred after searching for fraud evasion techniques. This gap may indicate the use of private browsing modes, manual history deletion, or offline planning before resuming research on anonymity tools."
+            "timestamp": "2024-09-03T13:48:00Z",
+            "event": "User visited the Python Downloads page [ce603e3c-f3c2-47b9-adae-5bf4ff227d11]",
+            "artifact_id": "ce603e3c-f3c2-47b9-adae-5bf4ff227d11"
+          },
+          {
+            "timestamp": "2024-09-03T13:50:00Z",
+            "event": "User searched for 'python pandas dataframe tutorial' using Google [048e013f-7145-42a5-97d6-bde061c3a73c]",
+            "artifact_id": "048e013f-7145-42a5-97d6-bde061c3a73c"
+          },
+          {
+            "timestamp": "2024-09-03T14:05:00Z",
+            "event": "User visited the Tor Browser Downloads page [de8bd502-8107-4498-9767-3d0de8b2f38a]",
+            "artifact_id": "de8bd502-8107-4498-9767-3d0de8b2f38a"
           }
         ],
-        "summary": "The recovered browser artifacts show a sequence of activities beginning with access to an internal banking dashboard, followed by searches for credit card fraud evasion and cryptocurrency anonymity. While there is no direct evidence of data exfiltration tools or file transfers in the provided artifacts, the pattern suggests preparatory behavior for financial fraud and potential anonymization of illicit activities. Additional network and endpoint logs are required to confirm actual data exfiltration.",
+        "gaps": [],
+        "summary": "The browser artifacts for user sarah.chen on 2024-09-03 document a concentrated session focused on data manipulation libraries, anonymized networking software, and cryptocurrency laundering techniques. While no direct file transfers or exfiltration commands are recorded, the rapid sequential acquisition of Python/Pandas for data structuring, Tor for traffic masking, and crypto methods for monetization strongly indicates preparatory steps consistent with covert data handling. Confirmation of active exfiltration requires correlation with network traffic logs, local file system modifications, and executed script records.",
         "hallucination_warnings": [],
         "artifact_ids_used": [
-          "8152bc46-63f9-4b81-9b55-fa45e2a2dd68",
-          "85f2f955-97c5-4599-a323-cd1822f99594",
-          "8d63061e-ddef-4590-83fc-db5cc8d5564a",
-          "077ce27b-0512-44ec-92df-4751d03506e7",
-          "87f7afdd-5f3b-4211-ae04-1229cdbf71e9",
-          "dd911f69-2cf3-41d8-b018-63caa2826398"
+          "de8bd502-8107-4498-9767-3d0de8b2f38a",
+          "c4fa9f3e-df56-433b-9c52-77d91cbcdeea",
+          "ce603e3c-f3c2-47b9-adae-5bf4ff227d11",
+          "12f09d5b-2c6b-4d27-bfa9-bad3abf04a6c",
+          "f99fab3e-8b97-435a-97ba-42680d06e78d",
+          "048e013f-7145-42a5-97d6-bde061c3a73c"
         ]
       }
     },
@@ -196,57 +218,55 @@
         "artifacts_retrieved": 2,
         "leads": [
           {
-            "lead": "User downloaded 'tor-browser-windows-x86_64-portable-13.0.exe' (85,983,232 bytes) from the official Tor Project website [8f9a6a57-e99d-4b13-8b74-fd9f58c0bdd9, 3f63b8f7-b6a5-439a-aecd-ccd9b98b9d8d].",
+            "lead": "User downloaded the Python 3.12.0 installer (python-3.12.0-amd64.exe) from the official Python FTP site [b462df6a-6429-4951-92fa-b59e85c9dffb].",
             "severity": "medium",
             "artifact_ids": [
-              "8f9a6a57-e99d-4b13-8b74-fd9f58c0bdd9",
-              "3f63b8f7-b6a5-439a-aecd-ccd9b98b9d8d"
+              "b462df6a-6429-4951-92fa-b59e85c9dffb"
             ],
-            "explanation": "Tor Browser is designed for anonymity and is often associated with circumventing surveillance or accessing restricted content, making its acquisition investigatively relevant."
+            "explanation": "Although Python is legitimate development software, the browser risk classification explicitly marks it as a dangerous_file, requiring verification of file integrity and confirmation that it was not tampered with or misidentified by the security engine."
           },
           {
-            "lead": "The downloaded executable was explicitly flagged with a 'dangerous_file' browser risk classification [8f9a6a57-e99d-4b13-8b74-fd9f58c0bdd9, 3f63b8f7-b6a5-439a-aecd-ccd9b98b9d8d].",
+            "lead": "User downloaded the Tor Browser portable executable (tor-browser-windows-x86_64-portable-13.0.exe) from the official Tor Project site [2371f2c6-b7be-4416-b4c3-2f256f60cee0].",
             "severity": "high",
             "artifact_ids": [
-              "8f9a6a57-e99d-4b13-8b74-fd9f58c0bdd9",
-              "3f63b8f7-b6a5-439a-aecd-ccd9b98b9d8d"
+              "2371f2c6-b7be-4416-b4c3-2f256f60cee0"
             ],
-            "explanation": "Despite originating from the legitimate Tor Project domain, the file triggered the browser's security heuristics. This indicates the file is either misidentified due to its executable nature, has been tampered with, or is blocked by default policy."
+            "explanation": "Tor Browser is an anonymity tool frequently blocked or flagged by enterprise security policies. Its classification as a dangerous_file combined with its purpose indicates a high likelihood of intent to bypass network monitoring, access restricted content, or conduct covert communications."
           },
           {
-            "lead": "The download was successfully completed using Google Chrome, which typically enforces strict download restrictions for executables [8f9a6a57-e99d-4b13-8b74-fd9f58c0bdd9, 3f63b8f7-b6a5-439a-aecd-ccd9b98b9d8d].",
+            "lead": "Both downloads were initiated sequentially within a 17-minute window using the Chrome browser [b462df6a-6429-4951-92fa-b59e85c9dffb, 2371f2c6-b7be-4416-b4c3-2f256f60cee0].",
             "severity": "high",
             "artifact_ids": [
-              "8f9a6a57-e99d-4b13-8b74-fd9f58c0bdd9",
-              "3f63b8f7-b6a5-439a-aecd-ccd9b98b9d8d"
+              "b462df6a-6429-4951-92fa-b59e85c9dffb",
+              "2371f2c6-b7be-4416-b4c3-2f256f60cee0"
             ],
-            "explanation": "Chrome's SmartScreen or download protection usually blocks or heavily warns users before allowing .exe downloads. A complete download state suggests the user likely bypassed explicit security prompts or disabled browser safety features."
+            "explanation": "The rapid acquisition of a programming environment alongside anonymity software suggests deliberate preparation for potentially unauthorized activities, such as developing custom scripts for evasion or preparing a secure channel for data handling."
           }
         ],
         "timeline": [
           {
-            "timestamp": "2024-09-03T14:05:00Z",
-            "event": "User downloaded 'tor-browser-windows-x86_64-portable-13.0.exe' (85,983,232 bytes) from https://www.torproject.org/dist/torbrowser/13.0/tor-browser-windows-x86_64-portable-13.0.exe, saving it to C:/Users/sarah.chen/Downloads/ [8f9a6a57-e99d-4b13-8b74-fd9f58c0bdd9]",
-            "artifact_id": "8f9a6a57-e99d-4b13-8b74-fd9f58c0bdd9"
+            "timestamp": "2024-09-03T13:48:00Z",
+            "event": "User downloaded python-3.12.0-amd64.exe from https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe [b462df6a-6429-4951-92fa-b59e85c9dffb]",
+            "artifact_id": "b462df6a-6429-4951-92fa-b59e85c9dffb"
           },
           {
             "timestamp": "2024-09-03T14:05:00Z",
-            "event": "Duplicate download record logged for the same Tor Browser executable, confirming the completion state and file path [3f63b8f7-b6a5-439a-aecd-ccd9b98b9d8d]",
-            "artifact_id": "3f63b8f7-b6a5-439a-aecd-ccd9b98b9d8d"
+            "event": "User downloaded tor-browser-windows-x86_64-portable-13.0.exe from https://www.torproject.org/dist/torbrowser/13.0/tor-browser-windows-x86_64-portable-13.0.exe [2371f2c6-b7be-4416-b4c3-2f256f60cee0]",
+            "artifact_id": "2371f2c6-b7be-4416-b4c3-2f256f60cee0"
           }
         ],
         "gaps": [
           {
-            "gap_start": "N/A",
-            "gap_end": "N/A",
-            "note": "No temporal gaps are detectable in the provided dataset. However, the presence of two identical download records for the exact same timestamp suggests potential log duplication or system retry behavior rather than a browsing history deletion."
+            "gap_start": "2024-09-03T14:05:00Z",
+            "gap_end": "2024-09-03T23:59:59Z",
+            "note": "No download or browsing activity is recorded after 14:05:00Z in the provided artifacts. This abrupt cessation of logged activity could indicate the use of private browsing mode, manual history deletion, or incomplete artifact recovery from the disk image."
           }
         ],
-        "summary": "The artifacts record a single unique download event where the user obtained the Tor Browser Portable executable via Google Chrome on September 3, 2024. Although sourced from the official Tor Project website, the file was classified as 'dangerous_file,' indicating it triggered browser security warnings. The successful download implies the user bypassed standard Chrome protections, making this activity suspicious and requiring further verification of the file's integrity and subsequent usage.",
+        "summary": "The user downloaded two executables classified as dangerous_files: a Python installer and the Tor Browser portable version, both retrieved from their official websites within a 17-minute span. The combination of development tools and anonymity software raises significant security concerns regarding potential covert activities or policy violations. Further analysis of post-download execution logs and network traffic is required to determine actual usage.",
         "hallucination_warnings": [],
         "artifact_ids_used": [
-          "3f63b8f7-b6a5-439a-aecd-ccd9b98b9d8d",
-          "8f9a6a57-e99d-4b13-8b74-fd9f58c0bdd9"
+          "2371f2c6-b7be-4416-b4c3-2f256f60cee0",
+          "b462df6a-6429-4951-92fa-b59e85c9dffb"
         ]
       }
     },
@@ -254,7 +274,7 @@
       "query_id": "Q004",
       "question": "Construct a chronological timeline of the user's activity on 2024-09-03.",
       "artifacts_retrieved": 10,
-      "leads_generated": 3,
+      "leads_generated": 4,
       "hallucination_warnings": [],
       "raw_response": {
         "question": "Construct a chronological timeline of the user's activity on 2024-09-03.",
@@ -262,96 +282,130 @@
         "artifacts_retrieved": 10,
         "leads": [
           {
-            "lead": "Direct navigation to a Pastebin page labeled 'fullz', which is common slang for complete stolen payment card and identity credentials, indicating potential interest in illicit data or fraud preparation [e928a57b-9df9-4364-b037-cd3fa16e098b, 214f37b9-0a98-45c3-849f-a78e650c941a].",
+            "lead": "User researched cryptocurrency anonymity and Tor-based dark web marketplaces [f99fab3e-8b97-435a-97ba-42680d06e78d, 532fa04f-8e8f-4128-8c17-4f18c96cf335]",
             "severity": "high",
             "artifact_ids": [
-              "e928a57b-9df9-4364-b037-cd3fa16e098b",
-              "214f37b9-0a98-45c3-849f-a78e650c941a"
+              "f99fab3e-8b97-435a-97ba-42680d06e78d",
+              "532fa04f-8e8f-4128-8c17-4f18c96cf335"
             ],
-            "explanation": "The use of a typed navigation to a known dark web/illicit data hosting site suggests intentional seeking of compromised data rather than accidental exposure, warranting immediate scrutiny for potential insider threats or fraud planning."
+            "explanation": "These searches indicate deliberate investigation into tools used to bypass surveillance and access illicit online markets, often associated with fraud or data theft."
           },
           {
-            "lead": "Download of a 1,048,576-byte CSV file named 'transaction_log_aug2024.csv' from an internal corporate banking domain [2fc2a107-5203-4c2d-ae6c-a3db314438a2, 166df419-7742-48bf-9d4f-387aa8aaf44f].",
+            "lead": "User directly accessed a Pastebin page containing 'fullz' (stolen personal/financial data) [791dcdb5-6c2c-4824-ad9e-55da05565bcf]",
             "severity": "high",
             "artifact_ids": [
-              "2fc2a107-5203-4c2d-ae6c-a3db314438a2",
-              "166df419-7742-48bf-9d4f-387aa8aaf44f"
+              "791dcdb5-6c2c-4824-ad9e-55da05565bcf"
             ],
-            "explanation": "Downloading a substantial internal financial dataset to a local machine, particularly shortly after visiting a site associated with stolen credentials, strongly suggests potential unauthorized data exfiltration or policy violation."
+            "explanation": "Visiting a 'fullz' dump suggests active interest in compromised credentials or financial data, potentially for identity theft or fraudulent transactions."
           },
           {
-            "lead": "Multiple artifacts share identical timestamps, URLs, and metadata but contain distinct UUIDs across bookmarks, searches, history, and downloads [31fffd8f-69e3-44ca-87f7-c1f2281d58c1, 1324a8ba-8b2a-4142-aa63-eed0c6f3cb37, 5c268d75-a5a4-4d86-ba5e-80c02ea504e6, af96d550-0338-4654-8102-e1c801791693, e928a57b-9df9-4364-b037-cd3fa16e098b, 214f37b9-0a98-45c3-849f-a78e650c941a, 2fc2a107-5203-4c2d-ae6c-a3db314438a2, 166df419-7742-48bf-9d4f-387aa8aaf44f].",
-            "severity": "low",
+            "lead": "User downloaded sensitive internal banking datasets (customer accounts and transaction logs) [40ae18f0-ae97-4d4d-9080-fbff2cdf1cda, 861a5dd2-bcf8-4606-9702-2432061ddf9c]",
+            "severity": "high",
             "artifact_ids": [
-              "31fffd8f-69e3-44ca-87f7-c1f2281d58c1",
-              "1324a8ba-8b2a-4142-aa63-eed0c6f3cb37",
-              "5c268d75-a5a4-4d86-ba5e-80c02ea504e6",
-              "af96d550-0338-4654-8102-e1c801791693",
-              "e928a57b-9df9-4364-b037-cd3fa16e098b",
-              "214f37b9-0a98-45c3-849f-a78e650c941a",
-              "2fc2a107-5203-4c2d-ae6c-a3db314438a2",
-              "166df419-7742-48bf-9d4f-387aa8aaf44f"
+              "40ae18f0-ae97-4d4d-9080-fbff2cdf1cda",
+              "861a5dd2-bcf8-4606-9702-2432061ddf9c"
             ],
-            "explanation": "Duplicate records with different identifiers may indicate browser synchronization conflicts, multiple active user profiles, or forensic imaging duplication, which should be verified to ensure accurate chain-of-custody and timeline reconstruction."
+            "explanation": "Downloading large volumes of customer and transaction data from internal bank URLs requires verification against authorized job functions; combined with prior dark web research, this raises strong insider threat indicators."
+          },
+          {
+            "lead": "Morning activity shows standard corporate navigation before shifting to suspicious research [dd937cf6-81b2-4368-858e-b7b8435be54c, b8e3293a-2595-449d-ad1f-e9496716dedc, f4b5da6c-6c26-42a4-8772-06d9de83eae2, 18bd9397-3c27-43cc-8041-646121e0caf6]",
+            "severity": "medium",
+            "artifact_ids": [
+              "dd937cf6-81b2-4368-858e-b7b8435be54c",
+              "b8e3293a-2595-449d-ad1f-e9496716dedc",
+              "f4b5da6c-6c26-42a4-8772-06d9de83eae2",
+              "18bd9397-3c27-43cc-8041-646121e0caf6"
+            ],
+            "explanation": "Early bookmarks and searches relate to routine banking operations, establishing a baseline that contrasts sharply with the midday pivot to anonymization and data dump sites."
           }
         ],
         "timeline": [
           {
+            "timestamp": "2024-09-03T08:40:00Z",
+            "event": "Bookmarked 'Employee Handbook' at URL https://bank.internal/employee-handbook [dd937cf6-81b2-4368-858e-b7b8435be54c]",
+            "artifact_id": "dd937cf6-81b2-4368-858e-b7b8435be54c"
+          },
+          {
+            "timestamp": "2024-09-03T08:55:00Z",
+            "event": "Visited Quarterly Reports at URL https://bank.internal/reports [b8e3293a-2595-449d-ad1f-e9496716dedc]",
+            "artifact_id": "b8e3293a-2595-449d-ad1f-e9496716dedc"
+          },
+          {
             "timestamp": "2024-09-03T09:00:00Z",
-            "event": "User bookmarked 'Bank Helpdesk' at URL https://bank.internal/helpdesk in the Work folder [31fffd8f-69e3-44ca-87f7-c1f2281d58c1, 1324a8ba-8b2a-4142-aa63-eed0c6f3cb37]",
-            "artifact_id": "31fffd8f-69e3-44ca-87f7-c1f2281d58c1"
+            "event": "Bookmarked 'Bank Helpdesk' at URL https://bank.internal/helpdesk [f4b5da6c-6c26-42a4-8772-06d9de83eae2]",
+            "artifact_id": "f4b5da6c-6c26-42a4-8772-06d9de83eae2"
           },
           {
             "timestamp": "2024-09-03T09:12:00Z",
-            "event": "User performed a Google search for 'Q3 financial reporting deadlines' [5c268d75-a5a4-4d86-ba5e-80c02ea504e6, af96d550-0338-4654-8102-e1c801791693]",
-            "artifact_id": "5c268d75-a5a4-4d86-ba5e-80c02ea504e6"
+            "event": "Searched for 'Q3 financial reporting deadlines' using Google [18bd9397-3c27-43cc-8041-646121e0caf6]",
+            "artifact_id": "18bd9397-3c27-43cc-8041-646121e0caf6"
           },
           {
             "timestamp": "2024-09-03T10:58:00Z",
-            "event": "User directly navigated (TYPED) to a Pastebin page titled 'dump \u2014 fullz' at URL https://pastebin.com/abc123def456 [e928a57b-9df9-4364-b037-cd3fa16e098b, 214f37b9-0a98-45c3-849f-a78e650c941a]",
-            "artifact_id": "e928a57b-9df9-4364-b037-cd3fa16e098b"
+            "event": "Visited Pastebin dump \u2014 fullz at URL https://pastebin.com/abc123def456 [791dcdb5-6c2c-4824-ad9e-55da05565bcf]",
+            "artifact_id": "791dcdb5-6c2c-4824-ad9e-55da05565bcf"
+          },
+          {
+            "timestamp": "2024-09-03T12:25:00Z",
+            "event": "Viewed DuckDuckGo search results for 'monero vs bitcoin anonymity' [f99fab3e-8b97-435a-97ba-42680d06e78d]",
+            "artifact_id": "f99fab3e-8b97-435a-97ba-42680d06e78d"
+          },
+          {
+            "timestamp": "2024-09-03T12:30:00Z",
+            "event": "Searched for 'tor browser dark web markets' using DuckDuckGo [532fa04f-8e8f-4128-8c17-4f18c96cf335]",
+            "artifact_id": "532fa04f-8e8f-4128-8c17-4f18c96cf335"
+          },
+          {
+            "timestamp": "2024-09-03T13:35:00Z",
+            "event": "Downloaded 'customer_accounts_Q3.xlsx' from https://bank.internal/exports/customer_accounts_Q3.xlsx [40ae18f0-ae97-4d4d-9080-fbff2cdf1cda]",
+            "artifact_id": "40ae18f0-ae97-4d4d-9080-fbff2cdf1cda"
           },
           {
             "timestamp": "2024-09-03T14:35:00Z",
-            "event": "User completed a download of 'transaction_log_aug2024.csv' (1,048,576 bytes) from https://bank.internal/exports/transaction_log_aug2024.csv [2fc2a107-5203-4c2d-ae6c-a3db314438a2, 166df419-7742-48bf-9d4f-387aa8aaf44f]",
-            "artifact_id": "2fc2a107-5203-4c2d-ae6c-a3db314438a2"
-          },
-          {
-            "timestamp": "2024-09-03T16:20:00Z",
-            "event": "User clicked a link to visit Google search results for 'weekend weather forecast' [cc8d72f4-6454-45a6-bd53-9cf5d8b78b4a]",
-            "artifact_id": "cc8d72f4-6454-45a6-bd53-9cf5d8b78b4a"
+            "event": "Downloaded 'transaction_log_aug2024.csv' from https://bank.internal/exports/transaction_log_aug2024.csv [861a5dd2-bcf8-4606-9702-2432061ddf9c]",
+            "artifact_id": "861a5dd2-bcf8-4606-9702-2432061ddf9c"
           },
           {
             "timestamp": "2024-09-03T16:50:00Z",
-            "event": "User performed a Google search for 'premier league results' [7e1270cb-81bf-4080-a880-9b2afa3831c1]",
-            "artifact_id": "7e1270cb-81bf-4080-a880-9b2afa3831c1"
+            "event": "Searched for 'premier league results' using Google [6d82c4a9-ff12-477b-9474-ae90366d3517]",
+            "artifact_id": "6d82c4a9-ff12-477b-9474-ae90366d3517"
           }
         ],
         "gaps": [
           {
             "gap_start": "2024-09-03T09:12:00Z",
             "gap_end": "2024-09-03T10:58:00Z",
-            "note": "A 1-hour 46-minute gap with no recorded browser activity. While consistent with standard work tasks, it could also indicate use of private browsing or temporary history clearing."
+            "note": "No browser activity recorded for 1 hour and 46 minutes immediately preceding a visit to a 'fullz' data dump site, suggesting possible use of private browsing or history deletion."
           },
           {
             "gap_start": "2024-09-03T10:58:00Z",
-            "gap_end": "2024-09-03T14:35:00Z",
-            "note": "A 3-hour 37-minute gap following the Pastebin visit and preceding the internal data download. The extended absence of logged activity may suggest offline work, meetings, or deliberate use of incognito/private modes to conceal navigation between the two high-risk events."
+            "gap_end": "2024-09-03T12:25:00Z",
+            "note": "A 1 hour and 27 minute gap exists between visiting the Pastebin dump and researching cryptocurrency anonymity, potentially indicating continued unrecorded browsing sessions."
+          },
+          {
+            "gap_start": "2024-09-03T12:30:00Z",
+            "gap_end": "2024-09-03T13:35:00Z",
+            "note": "A 1 hour and 5 minute gap separates dark web market research from the download of sensitive customer account data, warranting investigation into whether additional unauthorized actions occurred."
+          },
+          {
+            "gap_start": "2024-09-03T14:35:00Z",
+            "gap_end": "2024-09-03T16:50:00Z",
+            "note": "A 2 hour and 15 minute gap follows the second data download and precedes a sports search, which may represent unlogged activity or a shift to personal browsing."
           }
         ],
-        "summary": "The user's browser activity on 2024-09-03 transitions from routine work-related searches to highly suspicious behavior, including a direct visit to a Pastebin page associated with stolen credentials ('fullz') and the subsequent download of a large internal bank transaction log. These events, combined with duplicate artifact records and unlogged midday gaps, strongly indicate potential unauthorized data access or exfiltration that requires immediate forensic follow-up.",
+        "summary": "The user's activity on 2024-09-03 begins with routine corporate tasks but rapidly shifts toward researching anonymization tools, Tor, and dark web markets, alongside direct access to a 'fullz' data dump. This is followed by the download of two large internal banking datasets containing customer and transaction records. Multiple unrecorded time gaps throughout the day suggest potential use of private browsing modes or deliberate history clearing, raising significant insider threat and data exfiltration concerns.",
         "hallucination_warnings": [],
         "artifact_ids_used": [
-          "2fc2a107-5203-4c2d-ae6c-a3db314438a2",
-          "31fffd8f-69e3-44ca-87f7-c1f2281d58c1",
-          "af96d550-0338-4654-8102-e1c801791693",
-          "e928a57b-9df9-4364-b037-cd3fa16e098b",
-          "1324a8ba-8b2a-4142-aa63-eed0c6f3cb37",
-          "7e1270cb-81bf-4080-a880-9b2afa3831c1",
-          "166df419-7742-48bf-9d4f-387aa8aaf44f",
-          "214f37b9-0a98-45c3-849f-a78e650c941a",
-          "cc8d72f4-6454-45a6-bd53-9cf5d8b78b4a",
-          "5c268d75-a5a4-4d86-ba5e-80c02ea504e6"
+          "f4b5da6c-6c26-42a4-8772-06d9de83eae2",
+          "861a5dd2-bcf8-4606-9702-2432061ddf9c",
+          "b8e3293a-2595-449d-ad1f-e9496716dedc",
+          "791dcdb5-6c2c-4824-ad9e-55da05565bcf",
+          "6d82c4a9-ff12-477b-9474-ae90366d3517",
+          "40ae18f0-ae97-4d4d-9080-fbff2cdf1cda",
+          "f99fab3e-8b97-435a-97ba-42680d06e78d",
+          "18bd9397-3c27-43cc-8041-646121e0caf6",
+          "dd937cf6-81b2-4368-858e-b7b8435be54c",
+          "532fa04f-8e8f-4128-8c17-4f18c96cf335"
         ]
       }
     },
@@ -359,7 +413,7 @@
       "query_id": "Q005",
       "question": "Are there any unusual gaps or anomalies in the user's browser activity?",
       "artifacts_retrieved": 10,
-      "leads_generated": 4,
+      "leads_generated": 3,
       "hallucination_warnings": [],
       "raw_response": {
         "question": "Are there any unusual gaps or anomalies in the user's browser activity?",
@@ -367,104 +421,117 @@
         "artifacts_retrieved": 10,
         "leads": [
           {
-            "lead": "User conducted explicit searches regarding financial fraud and evasion techniques.",
+            "lead": "User visited a Pastebin page explicitly labeled as a 'fullz' data dump [791dcdb5-6c2c-4824-ad9e-55da05565bcf]",
             "severity": "high",
             "artifact_ids": [
-              "077ce27b-0512-44ec-92df-4751d03506e7"
+              "791dcdb5-6c2c-4824-ad9e-55da05565bcf"
             ],
-            "explanation": "The search query 'how to use stolen credit card without getting caught' directly indicates criminal intent and active planning to commit financial fraud while avoiding detection."
+            "explanation": "The term 'fullz' refers to complete sets of stolen personal and financial information. Visiting this resource indicates direct engagement with illicit data marketplaces or compromised credential repositories."
           },
           {
-            "lead": "User researched anonymity tools and illicit online marketplaces.",
+            "lead": "User conducted research on cryptocurrency anonymity and subsequently downloaded the Tor Browser [41183f70-bbf3-40a1-b407-26e821f1ff96, 565403f6-b7c1-4ee3-8fc3-d139a399f377, 532fa04f-8e8f-4128-8c17-4f18c96cf335, de8bd502-8107-4498-9767-3d0de8b2f38a, 2371f2c6-b7be-4416-b4c3-2f256f60cee0]",
             "severity": "high",
             "artifact_ids": [
-              "d457482c-e391-40a6-a8a3-2911708db527",
-              "74513dbb-d4b8-4490-9b1a-015c5b5a4432"
+              "41183f70-bbf3-40a1-b407-26e821f1ff96",
+              "565403f6-b7c1-4ee3-8fc3-d139a399f377",
+              "532fa04f-8e8f-4128-8c17-4f18c96cf335",
+              "de8bd502-8107-4498-9767-3d0de8b2f38a",
+              "2371f2c6-b7be-4416-b4c3-2f256f60cee0"
             ],
-            "explanation": "Searching for 'tor browser dark web markets' suggests preparation for anonymous communication or access to illegal marketplaces, aligning with the prior fraud-related search."
+            "explanation": "The sequential search for Monero versus Bitcoin anonymity, followed by queries for dark web markets and the actual download of the Tor Browser, demonstrates a clear operational security progression aimed at establishing anonymous internet access."
           },
           {
-            "lead": "Potential unauthorized exfiltration of sensitive internal banking data.",
-            "severity": "high",
+            "lead": "User downloaded sensitive internal bank transaction logs immediately after acquiring anonymization software [861a5dd2-bcf8-4606-9702-2432061ddf9c, 2371f2c6-b7be-4416-b4c3-2f256f60cee0]",
+            "severity": "medium",
             "artifact_ids": [
-              "2fc2a107-5203-4c2d-ae6c-a3db314438a2",
-              "166df419-7742-48bf-9d4f-387aa8aaf44f"
+              "861a5dd2-bcf8-4606-9702-2432061ddf9c",
+              "2371f2c6-b7be-4416-b4c3-2f256f60cee0"
             ],
-            "explanation": "Downloading a 1MB CSV file named 'transaction_log_aug2024.csv' from an internal bank server immediately following suspicious searches strongly indicates targeted data theft rather than routine work activity."
-          },
-          {
-            "lead": "Repeated duplicate artifact entries detected across multiple types.",
-            "severity": "low",
-            "artifact_ids": [
-              "a9e4fc7c-a1b2-4f56-83d0-18c159e2ae2d",
-              "c40bb77e-208a-44e6-8324-bfb5190a883b",
-              "31fffd8f-69e3-44ca-87f7-c1f2281d58c1",
-              "1324a8ba-8b2a-4142-aa63-eed0c6f3cb37",
-              "d457482c-e391-40a6-a8a3-2911708db527",
-              "74513dbb-d4b8-4490-9b1a-015c5b5a4432",
-              "2fc2a107-5203-4c2d-ae6c-a3db314438a2",
-              "166df419-7742-48bf-9d4f-387aa8aaf44f"
-            ],
-            "explanation": "Multiple identical history, bookmark, search, and download records suggest either a logging duplication issue or manual artifact replication, which may impact forensic timeline precision but does not inherently indicate malicious behavior."
+            "explanation": "The temporal proximity between downloading the Tor Browser and extracting a CSV file containing August 2024 transaction logs from an internal bank domain suggests potential data exfiltration preparation or unauthorized offline analysis of financial records."
           }
         ],
         "timeline": [
           {
-            "timestamp": "2024-09-03T08:55:00Z",
-            "event": "User visited the internal bank quarterly reports page via a link navigation. [a9e4fc7c-a1b2-4f56-83d0-18c159e2ae2d, c40bb77e-208a-44e6-8324-bfb5190a883b]",
-            "artifact_id": "a9e4fc7c-a1b2-4f56-83d0-18c159e2ae2d"
+            "timestamp": "2024-09-03T08:40:00Z",
+            "event": "User bookmarked 'Employee Handbook' at URL https://bank.internal/employee-handbook [dd937cf6-81b2-4368-858e-b7b8435be54c]",
+            "artifact_id": "dd937cf6-81b2-4368-858e-b7b8435be54c"
           },
           {
             "timestamp": "2024-09-03T09:00:00Z",
-            "event": "User saved a bookmark for the Bank Helpdesk URL in the Work folder. [31fffd8f-69e3-44ca-87f7-c1f2281d58c1, 1324a8ba-8b2a-4142-aa63-eed0c6f3cb37]",
-            "artifact_id": "31fffd8f-69e3-44ca-87f7-c1f2281d58c1"
+            "event": "User bookmarked 'Bank Helpdesk' at URL https://bank.internal/helpdesk [f4b5da6c-6c26-42a4-8772-06d9de83eae2]",
+            "artifact_id": "f4b5da6c-6c26-42a4-8772-06d9de83eae2"
           },
           {
-            "timestamp": "2024-09-03T09:55:00Z",
-            "event": "User visited BBC Business News via link navigation. [7b59f4dc-53db-4c46-941a-e8442ada468d]",
-            "artifact_id": "7b59f4dc-53db-4c46-941a-e8442ada468d"
+            "timestamp": "2024-09-03T09:12:00Z",
+            "event": "User searched for 'Q3 financial reporting deadlines' using Google [18bd9397-3c27-43cc-8041-646121e0caf6]",
+            "artifact_id": "18bd9397-3c27-43cc-8041-646121e0caf6"
           },
           {
-            "timestamp": "2024-09-03T10:10:00Z",
-            "event": "User performed a DuckDuckGo search for instructions on using stolen credit cards without detection. [077ce27b-0512-44ec-92df-4751d03506e7]",
-            "artifact_id": "077ce27b-0512-44ec-92df-4751d03506e7"
+            "timestamp": "2024-09-03T10:58:00Z",
+            "event": "User visited a Pastebin page titled 'Pastebin dump \u2014 fullz' [791dcdb5-6c2c-4824-ad9e-55da05565bcf]",
+            "artifact_id": "791dcdb5-6c2c-4824-ad9e-55da05565bcf"
+          },
+          {
+            "timestamp": "2024-09-03T12:25:00Z",
+            "event": "User searched for 'monero vs bitcoin anonymity' using DuckDuckGo [41183f70-bbf3-40a1-b407-26e821f1ff96]",
+            "artifact_id": "41183f70-bbf3-40a1-b407-26e821f1ff96"
           },
           {
             "timestamp": "2024-09-03T12:30:00Z",
-            "event": "User performed a DuckDuckGo search for Tor browser and dark web markets. [d457482c-e391-40a6-a8a3-2911708db527, 74513dbb-d4b8-4490-9b1a-015c5b5a4432]",
-            "artifact_id": "d457482c-e391-40a6-a8a3-2911708db527"
+            "event": "User visited a DuckDuckGo search results page for 'tor browser dark web markets' [565403f6-b7c1-4ee3-8fc3-d139a399f377]",
+            "artifact_id": "565403f6-b7c1-4ee3-8fc3-d139a399f377"
+          },
+          {
+            "timestamp": "2024-09-03T12:30:00Z",
+            "event": "User performed a DuckDuckGo search for 'tor browser dark web markets' [532fa04f-8e8f-4128-8c17-4f18c96cf335]",
+            "artifact_id": "532fa04f-8e8f-4128-8c17-4f18c96cf335"
+          },
+          {
+            "timestamp": "2024-09-03T14:05:00Z",
+            "event": "User visited the official Tor Browser download page [de8bd502-8107-4498-9767-3d0de8b2f38a]",
+            "artifact_id": "de8bd502-8107-4498-9767-3d0de8b2f38a"
+          },
+          {
+            "timestamp": "2024-09-03T14:05:00Z",
+            "event": "User downloaded the Tor Browser portable executable, which was classified as a dangerous file [2371f2c6-b7be-4416-b4c3-2f256f60cee0]",
+            "artifact_id": "2371f2c6-b7be-4416-b4c3-2f256f60cee0"
           },
           {
             "timestamp": "2024-09-03T14:35:00Z",
-            "event": "User completed a download of a 1MB internal bank transaction log CSV file from the bank's internal exports directory. [2fc2a107-5203-4c2d-ae6c-a3db314438a2, 166df419-7742-48bf-9d4f-387aa8aaf44f]",
-            "artifact_id": "2fc2a107-5203-4c2d-ae6c-a3db314438a2"
+            "event": "User downloaded a CSV file named 'transaction_log_aug2024.csv' from an internal bank domain [861a5dd2-bcf8-4606-9702-2432061ddf9c]",
+            "artifact_id": "861a5dd2-bcf8-4606-9702-2432061ddf9c"
           }
         ],
         "gaps": [
           {
-            "gap_start": "2024-09-03T10:10:00Z",
-            "gap_end": "2024-09-03T12:30:00Z",
-            "note": "A 2-hour 20-minute gap exists immediately after searching for methods to use stolen credit cards undetected. The absence of recorded activity during this window suggests potential use of private/incognito browsing, history deletion, or extended off-platform research."
+            "gap_start": "2024-09-03T09:12:00Z",
+            "gap_end": "2024-09-03T10:58:00Z",
+            "note": "A 1 hour 46 minute gap exists between the last recorded work-related search and the first visit to a known data dump site. This period lacks browser artifacts and may indicate the use of private browsing mode or deliberate history clearing before engaging with illicit content."
+          },
+          {
+            "gap_start": "2024-09-03T10:58:00Z",
+            "gap_end": "2024-09-03T12:25:00Z",
+            "note": "A 1 hour 27 minute gap follows the Pastebin visit. The absence of intermediate records before shifting to cryptocurrency anonymity research suggests potential off-browser activity, private browsing usage, or history deletion."
           },
           {
             "gap_start": "2024-09-03T12:30:00Z",
-            "gap_end": "2024-09-03T14:35:00Z",
-            "note": "A 2-hour 5-minute gap follows searches for dark web markets and precedes the download of sensitive internal bank transaction data. This unrecorded period likely contains unlogged navigation related to coordinating the data exfiltration or finalizing illicit preparations."
+            "gap_end": "2024-09-03T14:05:00Z",
+            "note": "A 1 hour 35 minute gap separates the initial Tor-related searches from the actual software download. This interval likely represents configuration time or continued use of incognito/private sessions, which do not generate standard history artifacts."
           }
         ],
-        "summary": "The browser activity demonstrates a rapid escalation from routine banking tasks to explicit searches regarding credit card fraud and dark web anonymity tools, culminating in the download of a large internal bank transaction log. Significant unrecorded time blocks between these events strongly indicate the use of private browsing modes or deliberate history clearing to conceal intermediate steps. These patterns collectively point to premeditated data exfiltration and preparation for financial fraud.",
+        "summary": "The user's browser activity on 2024-09-03 exhibits a sharp operational shift from routine banking tasks to researching anonymization tools and accessing illicit data sources. Key anomalies include a visit to a 'fullz' data dump, sequential searches for cryptocurrency privacy and dark web markets, and the subsequent download of the Tor Browser, followed closely by the extraction of internal bank transaction logs. Multiple multi-hour gaps between these events strongly suggest the use of private browsing modes or deliberate history clearing, warranting immediate correlation with network traffic and endpoint logs.",
         "hallucination_warnings": [],
         "artifact_ids_used": [
-          "74513dbb-d4b8-4490-9b1a-015c5b5a4432",
-          "d457482c-e391-40a6-a8a3-2911708db527",
-          "31fffd8f-69e3-44ca-87f7-c1f2281d58c1",
-          "7b59f4dc-53db-4c46-941a-e8442ada468d",
-          "1324a8ba-8b2a-4142-aa63-eed0c6f3cb37",
-          "a9e4fc7c-a1b2-4f56-83d0-18c159e2ae2d",
-          "077ce27b-0512-44ec-92df-4751d03506e7",
-          "166df419-7742-48bf-9d4f-387aa8aaf44f",
-          "c40bb77e-208a-44e6-8324-bfb5190a883b",
-          "2fc2a107-5203-4c2d-ae6c-a3db314438a2"
+          "de8bd502-8107-4498-9767-3d0de8b2f38a",
+          "f4b5da6c-6c26-42a4-8772-06d9de83eae2",
+          "861a5dd2-bcf8-4606-9702-2432061ddf9c",
+          "791dcdb5-6c2c-4824-ad9e-55da05565bcf",
+          "41183f70-bbf3-40a1-b407-26e821f1ff96",
+          "565403f6-b7c1-4ee3-8fc3-d139a399f377",
+          "18bd9397-3c27-43cc-8041-646121e0caf6",
+          "2371f2c6-b7be-4416-b4c3-2f256f60cee0",
+          "dd937cf6-81b2-4368-858e-b7b8435be54c",
+          "532fa04f-8e8f-4128-8c17-4f18c96cf335"
         ]
       }
     }
